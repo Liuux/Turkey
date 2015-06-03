@@ -2,6 +2,15 @@
 #include "Moose.h"
 #include "AppFactory.h"
 #include "ModulesApp.h"
+#include "HeatConductionKernel.h"
+#include "TemperatureTimeDerivative.h"
+
+#include "PyrolysisMaterial.h"
+
+#include "IsoThermalBC.h"
+#include "HeatFluxBC.h"
+#include "HeatTransferBC.h"
+#include "HeatRadiationBC.h"
 
 template<>
 InputParameters validParams<TurkeyApp>()
@@ -44,7 +53,18 @@ extern "C" void TurkeyApp__registerObjects(Factory & factory) { TurkeyApp::regis
 void
 TurkeyApp::registerObjects(Factory & factory)
 {
+	registerKernel(TemperatureTimeDerivative);
+	registerKernel(HeatConductionKernel);
+
+	registerMaterial(PyrolysisMaterial);
+
+	registerBoundaryCondition(IsoThermalBC);
+    registerBoundaryCondition(HeatFluxBC);
+	registerBoundaryCondition(HeatTransferBC);
+	registerBoundaryCondition(HeatRadiationBC);
+
 }
+
 
 // External entry point for dynamic syntax association
 extern "C" void TurkeyApp__associateSyntax(Syntax & syntax, ActionFactory & action_factory) { TurkeyApp::associateSyntax(syntax, action_factory); }
