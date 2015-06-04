@@ -15,6 +15,10 @@
     family = LAGRANGE
     order = FIRST
   [../]
+[./rho]
+    family = LAGRANGE
+    order = FIRST
+  [../]
 []
 
 [ICs]
@@ -22,6 +26,11 @@
     variable = temperature
     type = ConstantIC
     value = 300
+  [../]
+[./rho_ic]
+    variable = rho
+    type = ConstantIC
+    value = 1448
   [../]
 []
 
@@ -34,6 +43,10 @@
     type = HeatConductionKernel
     variable = temperature
   [../]
+ [./density]
+    type = DensitySourceKernel
+    variable = rho
+  [../]
 []
 
 [BCs]
@@ -41,7 +54,7 @@
     type = HeatFluxBC
     variable = temperature
     boundary = left
-    value = 10000
+    value = 100000
   [../]
   [./right]
     type = HeatFluxBC
@@ -67,18 +80,18 @@
   [./material]
     type = PyrolysisMaterial
     temperature = temperature
+    rho = rho
     block = 0
-    k = 1.2
-    cp = 500
-    rho = 1440
-    rhov = 1440
-    rhoc = 1440
+    k = 0.75
+    cp = 1256
+    rhov = 1448
+    rhoc = 1185
     cpg = 1
     rhog = 0
     deltaH = 1000
-    precoff = 0
+    precoff = 11000
     m = 2
-    ER = 0
+    ER = 10000
     permeability = 0
     viscosity = 0 
     porosity = 0 
@@ -88,8 +101,8 @@
 [Executioner]
   type = Transient
   solve_type = newton
-  dt = 1E-02
-  num_steps = 1000
+  dt = 1E-01
+  num_steps = 2000
 
   l_tol = 1e-04
   nl_rel_tol = 1e-05

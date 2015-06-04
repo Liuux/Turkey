@@ -10,7 +10,7 @@ InputParameters validParams<HeatConductionKernel>()
 
 HeatConductionKernel::HeatConductionKernel(const std::string & name, InputParameters parameters) :
   Kernel(name, parameters),
-  _k(getMaterialProperty<Real>("thermal_conductivity"))
+  _property(getMaterialProperty<PropertyPack>("property"))
 {
 }
 
@@ -18,13 +18,13 @@ Real HeatConductionKernel::computeQpResidual()
 {
 
   Real r(0);
-  r = _k[_qp]*_grad_u[_qp] * _grad_test[_i][_qp];
+  r = _property[_qp]._k* _property[_qp]._gradient_T * _grad_test[_i][_qp];
   return r;
 }
 
 Real HeatConductionKernel::computeQpJacobian()
 {
   Real jac(0);
-  jac = _k[_qp]*_grad_phi[_j][_qp] * _grad_test[_i][_qp];
+  jac =_property[_qp]._k*_grad_phi[_j][_qp] * _grad_test[_i][_qp];
   return jac;
 }

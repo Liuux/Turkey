@@ -2,6 +2,7 @@
 
 #include "TimeDerivative.h"
 #include "Material.h"
+#include "PyrolysisMaterial.h"
 
 
 class TemperatureTimeDerivative : public TimeDerivative
@@ -14,8 +15,7 @@ protected:
   virtual Real computeQpJacobian();
 
 private:
-  MaterialProperty<Real> & _cp;
-  MaterialProperty<Real> & _rho;
+  MaterialProperty<PropertyPack> & _Property;;
 };
 
 template<>

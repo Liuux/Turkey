@@ -10,7 +10,6 @@ InputParameters validParams<PyrolysisMaterial>()
 
   params.addParam<Real>("k", "k");
   params.addParam<Real>("cp", "cp");
-  params.addParam<Real>("rho", "rho");
   params.addParam<Real>("rhov", "rhov");
   params.addParam<Real>("rhoc", "rhoc");
   params.addParam<Real>("cpg", "cpg");
@@ -23,33 +22,21 @@ InputParameters validParams<PyrolysisMaterial>()
   params.addParam<Real>("viscosity", "viscosity");
   params.addParam<Real>("porosity", "porosity");
   params.addRequiredCoupledVar("temperature", "Coupled Temperature");
-//  params.addRequiredCoupledVar("pressure", "Coupled Pressure");
+  params.addRequiredCoupledVar("rho", "Coupled Density");
+
   return params;
 }
 
 PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters parameters) :
       Material(name, parameters),
-    _k(declareProperty<Real>("thermal_conductivity")),
-    _cp(declareProperty<Real>("specific_heat")),
-    _rho(declareProperty<Real>("density")),
-	_rhov(declareProperty<Real>("virgindensity")),
-	_rhoc(declareProperty<Real>("chardensity")),
-	_cpg(declareProperty<Real>("pygas_specific_heat")),
-	_rhog( declareProperty<Real>("pygas_density")),
-	_deltaH( declareProperty<Real>("pyrolysis_heat")),
-	_precoff( declareProperty<Real>("prexp_coff")),
-	_m( declareProperty<Real>("power_number")),
-	_ER( declareProperty<Real>("E/R")),
-	_permeability( declareProperty<Real>("permeability")),
-	_viscosity( declareProperty<Real>("viscosity")),
-	_porosity( declareProperty<Real>("porosity")),
-	_temperature_gradient(coupledGradient("temperature"))
-//    _pressure_gradient(coupledGradient("pressure"))
+	  _property(declareProperty<PropertyPack>("property")),
+	  _T_value(coupledValue("temperature")),
+      _gradient_T_value(coupledGradient("temperature")),
+	  _Rho_value(coupledValue("rho"))
 
 {
 	_k_value = getParam<Real>("k");
 	_cp_value = (getParam<Real>("cp"));
-	_rho_value = getParam<Real> ("rho");
 	_rhov_value = getParam<Real> ("rhov");
 	_rhoc_value = getParam<Real> ("rhoc");
 	_cpg_value = getParam<Real> ("cpg");
@@ -61,26 +48,29 @@ PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters p
 	_permeability_value = getParam<Real> ("permeability");
 	_viscosity_value = getParam<Real> ("viscosity");
 	_porosity_value = getParam<Real> ("porosity");
+
 }
 void PyrolysisMaterial::computeProperties()
 {
   Real epsi = 1E-08;
   for (unsigned int qp(0); qp < _qrule->n_points(); ++qp)
   {
-	    _k[qp] = _k_value;
-	    _cp[qp] = _cp_value;
-	    _rho[qp] = _rho_value;
-	 	_rhov[qp] = _rhov_value;
-	 	_rhoc[qp] = _rhoc_value;
-	 	_cpg[qp] = _cpg_value;
-	 	_rhog[qp] = _rhog_value;
-	 	_deltaH[qp] = _deltaH_value;
-	 	_precoff[qp] = _precoff_value,
-	 	_m[qp] = _m_value;
-	 	_ER[qp] = _ER_value;
-	 	_permeability[qp] = _permeability_value;
-	 	_viscosity[qp] = _viscosity_value;
-	 	_porosity[qp] = _porosity_value;
+	  _property[qp]._k = _k_value;
+	  _property[qp]._cp = _cp_value;
+	  _property[qp]._rhov = _rhov_value;
+	  _property[qp]._rhoc = _rhoc_value;
+	  _property[qp]._cpg = _cpg_value;
+	  _property[qp]._rhog = _rhog_value;
+	  _property[qp]._deltaH = _deltaH_value;
+	  _property[qp]._precoff = _precoff_value,
+	  _property[qp]._m = _m_value;
+	  _property[qp]._ER = _ER_value;
+	  _property[qp]._permeability = _permeability_value;
+	  _property[qp]._viscosity = _viscosity_value;
+	  _property[qp]._porosity = _porosity_value;
+	  _property[qp]._T = _T_value[qp];
+	  _property[qp]._gradient_T = _gradient_T_value[qp];
+	  _property[qp]._Rho = _Rho_value[qp];
   }
 }
 

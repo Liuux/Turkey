@@ -2,6 +2,7 @@
 
 #include "Kernel.h"
 #include "Material.h"
+#include "PyrolysisMaterial.h"
 
 class HeatConductionKernel : public Kernel
 {
@@ -14,7 +15,7 @@ protected:
   virtual Real computeQpJacobian();
 
 private:
-  MaterialProperty<Real> & _k;
+  MaterialProperty<PropertyPack> & _property;
 };
 
 template<>

@@ -4,8 +4,10 @@
 #include "ModulesApp.h"
 #include "HeatConductionKernel.h"
 #include "TemperatureTimeDerivative.h"
+#include "DensitySourceKernel.h"
 
 #include "PyrolysisMaterial.h"
+
 
 #include "IsoThermalBC.h"
 #include "HeatFluxBC.h"
@@ -55,6 +57,7 @@ TurkeyApp::registerObjects(Factory & factory)
 {
 	registerKernel(TemperatureTimeDerivative);
 	registerKernel(HeatConductionKernel);
+	registerKernel(DensitySourceKernel);
 
 	registerMaterial(PyrolysisMaterial);
 
