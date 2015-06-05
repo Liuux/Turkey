@@ -23,6 +23,7 @@ InputParameters validParams<PyrolysisMaterial>()
   params.addParam<Real>("porosity", "porosity");
   params.addRequiredCoupledVar("temperature", "Coupled Temperature");
   params.addRequiredCoupledVar("rho", "Coupled Density");
+  params.addRequiredCoupledVar("pressure", "gas pressure");
 
   return params;
 }
@@ -32,7 +33,11 @@ PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters p
 	  _property(declareProperty<PropertyPack>("property")),
 	  _T_value(coupledValue("temperature")),
       _gradient_T_value(coupledGradient("temperature")),
-	  _Rho_value(coupledValue("rho"))
+	  _Rho_value(coupledValue("rho")),
+	  _Rho_dt_value(coupledDot("rho")),
+	  _RhoDot_dRho_value(coupledDotDu("rho")),
+	  _Pressure_value(coupledDotDu("pressure")),
+	  _gradient_Pressure_value(coupledGradient("pressure"))
 
 {
 	_k_value = getParam<Real>("k");
@@ -71,6 +76,10 @@ void PyrolysisMaterial::computeProperties()
 	  _property[qp]._T = _T_value[qp];
 	  _property[qp]._gradient_T = _gradient_T_value[qp];
 	  _property[qp]._Rho = _Rho_value[qp];
+	  _property[qp]._Rho_dt = _Rho_dt_value[qp];
+	  _property[qp]._RhoDot_dRho = _RhoDot_dRho_value[qp];
+	  _property[qp]._Pressure = _Pressure_value[qp];
+	  _property[qp]._gradient_Pressure = _gradient_Pressure_value[qp];
   }
 }
 

@@ -25,6 +25,10 @@ public :
 	Real _T;
 	RealGradient _gradient_T;
 	Real _Rho;
+	Real _Rho_dt;
+	Real _RhoDot_dRho;
+	Real _Pressure;
+	RealGradient _gradient_Pressure;
 };
 
 class Function;
@@ -41,6 +45,11 @@ protected:
   VariableValue & _T_value;
   VariableGradient & _gradient_T_value;
   VariableValue & _Rho_value;
+  VariableValue & _Rho_dt_value;
+  VariableValue & _RhoDot_dRho_value;
+  VariableValue & _Pressure_value;
+  VariableGradient & _gradient_Pressure_value;
+
   //get properties
   Real  _k_value;
   Real  _cp_value;

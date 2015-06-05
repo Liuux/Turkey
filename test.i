@@ -1,11 +1,10 @@
 [Mesh]
   type = GeneratedMesh
   dim = 2
-   dim = 2
   xmin = 0
   ymin = 0
-  xmax = 0.0362
-  ymax = 0.0362
+  xmax = 0.018
+  ymax = 0.018
   nx = 60
   ny = 60
 []
@@ -16,6 +15,10 @@
     order = FIRST
   [../]
 [./rho]
+    family = LAGRANGE
+    order = FIRST
+  [../]
+[./pressure]
     family = LAGRANGE
     order = FIRST
   [../]
@@ -32,6 +35,11 @@
     type = ConstantIC
     value = 1448
   [../]
+[./pressure_ic]
+    variable = pressure
+    type = ConstantIC
+    value = 0
+  [../]
 []
 
 [Kernels]
@@ -43,9 +51,17 @@
     type = HeatConductionKernel
     variable = temperature
   [../]
+  [./pyrolysisource]
+    type = PyrolysisSourceKernel
+    variable = temperature
+  [../]
  [./density]
     type = DensitySourceKernel
     variable = rho
+  [../]
+[./darcypressure]
+    type = DarcyPressure
+    variable = pressure
   [../]
 []
 
@@ -74,6 +90,30 @@
     boundary = bottom
     value = 0
   [../]
+ [./pressureleft]
+    type = IsoThermalBC
+    variable = pressure
+    boundary = left
+    value = 0
+  [../]
+  [./pressureright]
+    type = HeatFluxBC
+    variable = pressure
+    boundary = right
+    value = 0
+  [../]
+  [./pressuretop]
+    type = HeatFluxBC
+    variable = pressure
+    boundary = top
+    value = 0
+  [../]
+ [./pressurebottom]
+    type = HeatFluxBC
+    variable = pressure
+    boundary = bottom
+    value = 0
+  [../]
 []
 
 [Materials]
@@ -81,20 +121,21 @@
     type = PyrolysisMaterial
     temperature = temperature
     rho = rho
+    pressure = pressure
     block = 0
     k = 0.75
     cp = 1256
     rhov = 1448
     rhoc = 1185
     cpg = 1
-    rhog = 0
-    deltaH = 1000
+    rhog = 100
+    deltaH = -500000
     precoff = 11000
     m = 2
     ER = 10000
-    permeability = 0
-    viscosity = 0 
-    porosity = 0 
+    permeability = 8.968e-9
+    viscosity = 1.98e-5
+    porosity = 0.3 
   [../]
 []
 
