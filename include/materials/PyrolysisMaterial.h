@@ -15,6 +15,7 @@ public :
 	Real  _cpg;
 	Real  _rhog;
 	Real  _deltaH;
+	Real  _Source;
 	Real  _precoff;
 	Real  _m;
 	Real  _ER;
@@ -29,6 +30,14 @@ public :
 	Real _RhoDot_dRho;
 	Real _Pressure;
 	RealGradient _gradient_Pressure;
+//  variable number
+	unsigned int _T_num;
+	unsigned int _Rho_num;
+	unsigned int _Pressure_num;
+	// compute dsource_dt dsource_drho
+	  Real _dsource_dT;
+	  Real _dsource_dRho;
+
 };
 
 class Function;
@@ -39,7 +48,8 @@ public:
 	PyrolysisMaterial(const std::string & name, InputParameters parameters);
 
 protected:
-  virtual void computeProperties();
+	Real Source(Real rho,Real T,Real rhoc,Real rhov,Real precoff, Real ER,Real m);
+    virtual void computeProperties();
   //get variables
   MaterialProperty<PropertyPack> & _property;
   VariableValue & _T_value;
@@ -49,7 +59,6 @@ protected:
   VariableValue & _RhoDot_dRho_value;
   VariableValue & _Pressure_value;
   VariableGradient & _gradient_Pressure_value;
-
   //get properties
   Real  _k_value;
   Real  _cp_value;
@@ -64,6 +73,11 @@ protected:
   Real  _permeability_value;
   Real  _viscosity_value;
   Real  _porosity_value;
+  // get variables number
+  unsigned int _T_num_value;
+  unsigned int _Rho_num_value;
+  unsigned int _Pressure_num_value;
+
 
 
 };

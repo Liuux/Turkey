@@ -17,14 +17,14 @@ PyrolysisSourceKernel::PyrolysisSourceKernel(const std::string & name, InputPara
 Real PyrolysisSourceKernel::computeQpResidual()
 {
 	Real r(0);
-	r = _property[_qp]._deltaH * _property[_qp]._Rho_dt;
+	r = -_property[_qp]._deltaH * _property[_qp]._Source* _test[_i][_qp];
   return r;
 }
 
 Real PyrolysisSourceKernel::computeQpJacobian()
 {
 	Real r(0);
-	r = _property[_qp]._deltaH * _property[_qp]._RhoDot_dRho * _test[_i][_qp] * _phi[_j][_qp];
+	r = -_property[_qp]._deltaH * _property[_qp]._dsource_dT * _test[_i][_qp] * _phi[_j][_qp];
 
    return r;
 }
@@ -32,14 +32,14 @@ Real  PyrolysisSourceKernel::computeQpOffDiagJacobian(unsigned int jvar)
  {
 
 
-//	 if ( jvar ==   _rho_num)
-//	    {
-//	 	  return( _phi[_j][_qp]*_cp *_u_dot[_qp]*_test[_i][_qp]+_deltaH * _rhoDot_dRho[_qp]  * _test[_i][_qp] * _phi[_j][_qp] );
-//	    }
-//	 else
-//	 {
+	 if ( jvar == _property[_qp]._Rho_num  )
+	    {
+	 	  return( -_property[_qp]._deltaH * _property[_qp]._dsource_dRho * _test[_i][_qp] * _phi[_j][_qp]);
+	    }
+	 else
+	 {
 		 return (0);
-//	 }
+	 }
  }
 
 

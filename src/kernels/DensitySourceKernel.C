@@ -51,17 +51,17 @@ Real DensitySourceKernel::computeQpJacobian()
  {
 
 
-//	 if ( jvar == _T_num)
-//	    {
-//		 Real epsi = 1E-08;
-//	     Real source = Source(_u[_qp],_T[_qp]);
-//	 	 Real source_new =  Source(_u[_qp],_T[_qp]+epsi);
-//	    return (source_new-source)/epsi*_phi[_j][_qp]*_test[_i][_qp];
-//	    }
-//	 else
-//	 {
+	 if ( jvar == _property[_qp]._T_num)
+	    {
+		 Real epsi = 1E-08;
+	     Real source = Source(_property[_qp]._Rho,_property[_qp]._T,_property[_qp]._rhoc,_property[_qp]._rhov,_property[_qp]._precoff,_property[_qp]._ER,_property[_qp]._m);
+	 	 Real source_new =  Source(_property[_qp]._Rho,_property[_qp]._T,_property[_qp]._rhoc,_property[_qp]._rhov,_property[_qp]._precoff,_property[_qp]._ER,_property[_qp]._m);
+	    return (source_new-source)/epsi*_phi[_j][_qp]*_test[_i][_qp];
+	    }
+ else
+	 {
 		 return (0);
-//	 }
+	 }
  }
 
 

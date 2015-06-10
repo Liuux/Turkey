@@ -1,0 +1,26 @@
+
+#ifndef FLUXBC_H
+#define FLUXBC_H
+
+#include "IntegratedBC.h"
+
+class PostprocessorFluxBC;
+
+template<>
+InputParameters validParams<PostprocessorFluxBC>();
+
+class PostprocessorFluxBC : public IntegratedBC
+{
+public:
+	PostprocessorFluxBC(const std::string & name, InputParameters params);
+  virtual ~PostprocessorFluxBC();
+
+protected:
+  virtual Real computeQpResidual();
+  virtual Real computeQpJacobian();
+
+  virtual RealGradient computeQpFluxResidual() = 0;
+  virtual RealGradient computeQpFluxJacobian() = 0;
+};
+
+#endif /* FLUXBC_H */

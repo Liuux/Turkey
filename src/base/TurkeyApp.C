@@ -7,6 +7,7 @@
 #include "DensitySourceKernel.h"
 #include "PyrolysisSourceKernel.h"
 #include "DarcyPressure.h"
+#include "GasConvection.h"
 
 #include "PyrolysisMaterial.h"
 
@@ -15,6 +16,12 @@
 #include "HeatFluxBC.h"
 #include "HeatTransferBC.h"
 #include "HeatRadiationBC.h"
+#include "PostprocessorFluxBC.h"
+
+#include "PyrolysisGasVelocity.h"
+#include "PyrolysisRate.h"
+
+
 
 template<>
 InputParameters validParams<TurkeyApp>()
@@ -62,6 +69,7 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerKernel(DensitySourceKernel);
 	registerKernel(PyrolysisSourceKernel);
 	registerKernel(DarcyPressure);
+	registerKernel(GasConvection);
 
 	registerMaterial(PyrolysisMaterial);
 
@@ -69,6 +77,10 @@ TurkeyApp::registerObjects(Factory & factory)
     registerBoundaryCondition(HeatFluxBC);
 	registerBoundaryCondition(HeatTransferBC);
 	registerBoundaryCondition(HeatRadiationBC);
+	registerBoundaryCondition(PostprocessorFluxBC);
+
+	registerAux(PyrolysisGasVelocity);
+	registerAux(PyrolysisRate);
 
 }
 

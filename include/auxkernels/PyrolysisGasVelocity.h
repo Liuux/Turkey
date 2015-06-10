@@ -1,0 +1,23 @@
+
+#include "AuxKernel.h"
+#include "PyrolysisMaterial.h"
+
+class PyrolysisGasVelocity;
+
+template<>
+InputParameters validParams<PyrolysisGasVelocity>();
+
+class PyrolysisGasVelocity : public AuxKernel
+{
+public:
+	PyrolysisGasVelocity(const std::string & name, InputParameters parameters);
+
+    virtual ~PyrolysisGasVelocity() {}
+
+protected:
+  virtual Real computeValue();
+  int _component;
+  MaterialProperty<PropertyPack> & _property;
+};
+
+

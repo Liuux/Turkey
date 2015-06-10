@@ -27,7 +27,25 @@ InputParameters validParams<PyrolysisMaterial>()
 
   return params;
 }
-
+Real PyrolysisMaterial::Source(Real rho,Real T,Real rhoc,Real rhov,Real precoff, Real ER,Real m)
+{
+	if (T>600)
+	{
+		if ((rho-rhoc)<1)
+		{
+			return 0;
+		}
+		else
+		{
+			Real tmp = (rho-rhoc)/rhov;
+			return  precoff*exp(-ER / T)*rhov*pow(tmp,m);
+		}
+	}
+	else
+	{
+		return 0;
+	}
+}
 PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters parameters) :
       Material(name, parameters),
 	  _property(declareProperty<PropertyPack>("property")),
@@ -36,8 +54,11 @@ PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters p
 	  _Rho_value(coupledValue("rho")),
 	  _Rho_dt_value(coupledDot("rho")),
 	  _RhoDot_dRho_value(coupledDotDu("rho")),
-	  _Pressure_value(coupledDotDu("pressure")),
-	  _gradient_Pressure_value(coupledGradient("pressure"))
+	  _Pressure_value(coupledValue("pressure")),
+	  _gradient_Pressure_value(coupledGradient("pressure")),
+	  _T_num_value(coupled("temperature")),
+	  _Rho_num_value(coupled("rho")),
+	  _Pressure_num_value(coupled("pressure"))
 
 {
 	_k_value = getParam<Real>("k");
@@ -67,6 +88,7 @@ void PyrolysisMaterial::computeProperties()
 	  _property[qp]._cpg = _cpg_value;
 	  _property[qp]._rhog = _rhog_value;
 	  _property[qp]._deltaH = _deltaH_value;
+	  _property[qp]._Source = Source( _Rho_value[qp],_T_value[qp],_rhoc_value,_rhov_value,_precoff_value,_ER_value,_m_value);
 	  _property[qp]._precoff = _precoff_value,
 	  _property[qp]._m = _m_value;
 	  _property[qp]._ER = _ER_value;
@@ -80,6 +102,17 @@ void PyrolysisMaterial::computeProperties()
 	  _property[qp]._RhoDot_dRho = _RhoDot_dRho_value[qp];
 	  _property[qp]._Pressure = _Pressure_value[qp];
 	  _property[qp]._gradient_Pressure = _gradient_Pressure_value[qp];
+	  _property[qp]._T_num = _T_num_value;
+	  _property[qp]._Rho_num = _Rho_num_value;
+	  _property[qp]._Pressure_num = _Pressure_num_value;
+
+
+	  Real epsi = 1E-08;
+	  Real source = Source( _Rho_value[qp],_T_value[qp],_rhoc_value,_rhov_value,_precoff_value,_ER_value,_m_value);
+	  Real source_new1 = Source( _Rho_value[qp],_T_value[qp]+epsi,_rhoc_value,_rhov_value,_precoff_value,_ER_value,_m_value);
+	  Real source_new2 = Source( _Rho_value[qp]+epsi,_T_value[qp]+epsi,_rhoc_value,_rhov_value,_precoff_value,_ER_value,_m_value);
+	  _property[qp]._dsource_dT = (source_new1-source)/epsi;
+	 _property[qp]._dsource_dRho = (source_new2-source)/epsi;
   }
 }
 
