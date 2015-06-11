@@ -18,7 +18,7 @@ InputParameters validParams<PyrolysisMaterial>()
   params.addParam<Real>("precoff", "precoff");
   params.addParam<Real>("m", "m");
   params.addParam<Real>("ER", "ER");
-  params.addParam<Real>("permeability", "permeability");
+  params.addParam<RealTensorValue>("permeability", "permeability");
   params.addParam<Real>("viscosity", "viscosity");
   params.addParam<Real>("porosity", "porosity");
   params.addRequiredCoupledVar("temperature", "Coupled Temperature");
@@ -71,7 +71,7 @@ PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters p
 	_precoff_value = getParam<Real> ("precoff");
 	_m_value = getParam<Real> ("m");
 	_ER_value = getParam<Real> ("ER");
-	_permeability_value = getParam<Real> ("permeability");
+	_permeability_value = getParam<RealTensorValue> ("permeability");
 	_viscosity_value = getParam<Real> ("viscosity");
 	_porosity_value = getParam<Real> ("porosity");
 

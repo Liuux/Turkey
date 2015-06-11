@@ -76,11 +76,11 @@
     type = PyrolysisSourceKernel
     variable = temperature
   [../]
- #[./gasconvection]
-  #  type = GasConvection
-  #  variable = temperature
- #[../]
- [./density]
+  [./gasconvection]
+    type = GasConvection
+    variable = temperature
+  [../]
+  [./density]
     type = DensitySourceKernel
     variable = rho
   [../]
@@ -112,7 +112,7 @@
     type = HeatFluxBC
     variable = temperature
     boundary = left
-    value = 200000
+    value = 50000
   [../]
   [./right]
     type = HeatFluxBC
@@ -124,7 +124,7 @@
     type = HeatFluxBC
     variable = temperature
     boundary = top
-    value = 200000
+    value = 50000
   [../]
  [./bottom]
     type = HeatFluxBC
@@ -136,7 +136,7 @@
     type = DirichletBC
     variable = pressure
     boundary = left
-    value = 10000
+    value = 0
   [../]
   [./pressureright]
     type = HeatFluxBC
@@ -148,7 +148,7 @@
     type = DirichletBC
     variable = pressure
     boundary = top
-    value = 10000
+    value = 0
   [../]
  [./pressurebottom]
     type = HeatFluxBC
@@ -166,17 +166,19 @@
     pressure = pressure
     block = 0
     k = 0.75
-    cp = 1256
+    cp = 556
     rhov = 1448
-    rhoc = 1185
-    cpg = 1
-    rhog = 0.01
+    rhoc = 1000
+    cpg = 200
+    rhog = 10
     deltaH = 100000
     precoff = 11000
     m = 2
     ER = 10000
-    permeability = 8.968e-12
-    viscosity = 1.98e-4
+    permeability = '0 0 0 
+                    0 8.9e-9 0
+                    0 0 0'
+    viscosity = 1.98e-5
     porosity = 0.3 
   [../]
 []
@@ -185,11 +187,11 @@
   type = Transient
   solve_type = newton
   scheme = bdf2
-  dt = 1E-02
-  num_steps = 2000
+  dt = 1E-01
+  num_steps = 5000
 
   l_tol = 1e-04
-  nl_rel_tol = 1e-08
+  nl_rel_tol = 1e-06
   l_max_its = 10
   nl_max_its = 10
   petsc_options_iname = '-pc_type -pc_hypre_type'

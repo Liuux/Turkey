@@ -19,7 +19,7 @@ public :
 	Real  _precoff;
 	Real  _m;
 	Real  _ER;
-	Real  _permeability;
+	RealTensorValue  _permeability;
 	Real  _viscosity;
 	Real  _porosity;
 // variables
@@ -70,7 +70,7 @@ protected:
   Real  _precoff_value;
   Real  _m_value;
   Real  _ER_value;
-  Real  _permeability_value;
+  RealTensorValue _permeability_value;
   Real  _viscosity_value;
   Real  _porosity_value;
   // get variables number

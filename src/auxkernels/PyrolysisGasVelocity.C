@@ -23,8 +23,7 @@ PyrolysisGasVelocity::PyrolysisGasVelocity(const std::string & name, InputParame
 Real
 PyrolysisGasVelocity::computeValue()
 {
-//	RealVectorValue tmp = _property[_qp]._rhog*_property[_qp]._permeability/_property[_qp]._viscosity/_property[_qp]._porosity*_property[_qp]._gradient_Pressure;
-	RealVectorValue tmp = _property[_qp]._gradient_Pressure;
+	RealVectorValue tmp = _property[_qp]._rhog*_property[_qp]._permeability/_property[_qp]._viscosity/_property[_qp]._porosity*_property[_qp]._gradient_Pressure;
   return -tmp(_component);
 //  return -_kp/_viscosity/_poro*_pressure_gradient[_qp](_component);
 }
