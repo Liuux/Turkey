@@ -7,20 +7,47 @@
   ymax = 0.009
   nx = 30
   ny = 30
+  elem_type = QUAD4
+  displacements = 'disp_x disp_y'
 []
+[Functions]
+  [./disp_x_exact]
+    type = ParsedFunction
+    value = -(t*x)/500
+  [../]
+  [./disp_x_ffn]
+    type = ParsedFunction
+    value = -(t*x)/500
+  [../]
 
+  [./disp_y_exact]
+    type = ParsedFunction
+    value = 0
+  [../]
+  [./disp_y_ffn]
+    type = ParsedFunction
+    value = 0
+  [../]
+
+[]
 [Variables]
   [./temperature]
     family = LAGRANGE
     order = FIRST
   [../]
-[./rho]
+  [./rho]
     family = LAGRANGE
     order = FIRST
   [../]
-[./pressure]
+  [./pressure]
     family = LAGRANGE
     order = FIRST
+  [../]
+  [./disp_x]
+  [../]
+  [./disp_y]
+  [../]
+  [./disp_z]
   [../]
 []
 
@@ -38,6 +65,20 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
+
+  [./GridVelocity_x]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+  [./GridVelocity_y]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+  [./GridVelocity_z]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+
   [./Rho_dt]
     order = CONSTANT
     family = MONOMIAL
@@ -51,12 +92,12 @@
     type = ConstantIC
     value = 300
   [../]
-[./rho_ic]
+  [./rho_ic]
     variable = rho
     type = ConstantIC
     value = 1448
   [../]
-[./pressure_ic]
+  [./pressure_ic]
     variable = pressure
     type = ConstantIC
     value = 0
@@ -84,13 +125,55 @@
     type = DensitySourceKernel
     variable = rho
   [../]
-[./darcypressure]
+  [./darcypressure]
     type = DarcyPressure
     variable = pressure
   [../]
+  [./disp_x_td]
+    type = TimeDerivative
+    variable = disp_x
+    use_displaced_mesh = true
+  [../]
+  [./disp_x_diff]
+    type = Diffusion
+    variable = disp_x
+    use_displaced_mesh = true
+  [../]
+  [./disp_x_ffn]
+    type = UserForcingFunction
+    variable = disp_x
+    function = disp_x_ffn
+    use_displaced_mesh = true
+  [../]
+  [./disp_y_td]
+    type = TimeDerivative
+    variable = disp_y
+    use_displaced_mesh = true
+  [../]
+  [./disp_y_diff]
+    type = Diffusion
+    variable = disp_y
+    use_displaced_mesh = true
+  [../]
+  [./disp_y_ffn]
+    type = UserForcingFunction
+    variable = disp_y
+    function = disp_y_ffn
+    use_displaced_mesh = true
+  [../]
+  [./disp_z_td]
+    type = TimeDerivative
+    variable = disp_z
+    use_displaced_mesh = true
+  [../]
+  [./disp_z_ffn]
+    type = UserForcingFunction
+    variable = disp_y
+    function = disp_y_ffn
+    use_displaced_mesh = true
+  [../]
 []
 [AuxKernels]
- 
   [./gasvelocity_x]
     type = PyrolysisGasVelocity
     variable = GasVelocity_x
@@ -101,6 +184,23 @@
     variable = GasVelocity_y
     component = y
   [../]
+
+  [./gridvelocity_x]
+    type = GridMovement
+    variable = GridVelocity_x
+    component = x
+  [../]
+  [./gridvelocity_y]
+    type = GridMovement
+    variable = GridVelocity_y
+    component = y
+  [../]
+  [./gridvelocity_z]
+    type = GridMovement
+    variable = GridVelocity_z
+    component = z
+  [../]
+
  [./PyrolysisRate]
     type = PyrolysisRate
     variable = Rho_dt
@@ -112,19 +212,19 @@
     type = HeatFluxBC
     variable = temperature
     boundary = left
-    value = 200000
+    value = 0
   [../]
   [./right]
     type = HeatFluxBC
     variable = temperature
     boundary = right
-    value = 0
+    value = 100000
   [../]
   [./top]
     type = HeatFluxBC
     variable = temperature
     boundary = top
-    value = 200000
+    value = 0
   [../]
  [./bottom]
     type = HeatFluxBC
@@ -156,6 +256,19 @@
     boundary = bottom
     value = 0
   [../]
+ [./disp_x_all]
+    type = FunctionDirichletBC
+    variable = disp_x
+    boundary = 'left right top bottom'
+    function = disp_x_exact
+  [../]
+
+  [./disp_y_all]
+    type = FunctionDirichletBC
+    variable = disp_y
+    boundary = 'left right top bottom'
+    function = disp_y_exact
+  [../]
 []
 
 [Materials]
@@ -180,6 +293,9 @@
                     0 0 0'
     viscosity = 1.98e-5
     porosity = 0.3 
+    disp_x = disp_x
+    disp_y = disp_y
+    disp_z = disp_z
   [../]
 []
 

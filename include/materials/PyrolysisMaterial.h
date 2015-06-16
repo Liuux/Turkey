@@ -37,6 +37,13 @@ public :
 	// compute dsource_dt dsource_drho
 	  Real _dsource_dT;
 	  Real _dsource_dRho;
+   // get grid movement
+	  Real _disp_x;
+	  Real _disp_y;
+	  Real _disp_z;
+	  Real _vm_x;
+	  Real _vm_y;
+	  Real _vm_z;
 
 };
 
@@ -77,7 +84,13 @@ protected:
   unsigned int _T_num_value;
   unsigned int _Rho_num_value;
   unsigned int _Pressure_num_value;
-
+// get grid movement
+  VariableValue & _disp_x_value;
+  VariableValue & _disp_y_value;
+  VariableValue & _disp_z_value;
+  VariableValue & _vm_x_value;
+  VariableValue & _vm_y_value;
+  VariableValue & _vm_z_value;
 
 
 };

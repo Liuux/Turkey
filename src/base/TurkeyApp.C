@@ -20,6 +20,7 @@
 
 #include "PyrolysisGasVelocity.h"
 #include "PyrolysisRate.h"
+#include "GridMovement.h"
 
 
 
@@ -81,6 +82,7 @@ TurkeyApp::registerObjects(Factory & factory)
 
 	registerAux(PyrolysisGasVelocity);
 	registerAux(PyrolysisRate);
+	registerAux(GridMovement);
 
 }
 
