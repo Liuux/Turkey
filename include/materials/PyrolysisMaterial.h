@@ -44,6 +44,7 @@ public :
 	  Real _vm_x;
 	  Real _vm_y;
 	  Real _vm_z;
+	  RealVectorValue _vm;
 
 };
 

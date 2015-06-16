@@ -8,6 +8,7 @@
 #include "PyrolysisSourceKernel.h"
 #include "DarcyPressure.h"
 #include "GasConvection.h"
+#include "CoordMoveConvection.h"
 
 #include "PyrolysisMaterial.h"
 
@@ -71,6 +72,7 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerKernel(PyrolysisSourceKernel);
 	registerKernel(DarcyPressure);
 	registerKernel(GasConvection);
+	registerKernel(CoordMoveConvection);
 
 	registerMaterial(PyrolysisMaterial);
 

@@ -13,11 +13,11 @@
 [Functions]
   [./disp_x_exact]
     type = ParsedFunction
-    value = -(t*x)/500
+    value = -(t*x)/100
   [../]
   [./disp_x_ffn]
     type = ParsedFunction
-    value = -(t*x)/500
+    value = -(x)/100
   [../]
 
   [./disp_y_exact]
@@ -108,6 +108,7 @@
   [./temporal]
     type = TemperatureTimeDerivative
     variable = temperature
+    use_displaced_mesh = true
   [../]
   [./diff]
     type = HeatConductionKernel
@@ -121,21 +122,23 @@
     type = GasConvection
     variable = temperature
   [../]
+  [./CoordMoveConvection]
+    type = CoordMoveConvection
+    variable = temperature
+  [../]
+
   [./density]
     type = DensitySourceKernel
     variable = rho
   [../]
+
   [./darcypressure]
     type = DarcyPressure
     variable = pressure
   [../]
+
   [./disp_x_td]
     type = TimeDerivative
-    variable = disp_x
-    use_displaced_mesh = true
-  [../]
-  [./disp_x_diff]
-    type = Diffusion
     variable = disp_x
     use_displaced_mesh = true
   [../]
@@ -147,11 +150,6 @@
   [../]
   [./disp_y_td]
     type = TimeDerivative
-    variable = disp_y
-    use_displaced_mesh = true
-  [../]
-  [./disp_y_diff]
-    type = Diffusion
     variable = disp_y
     use_displaced_mesh = true
   [../]
@@ -233,19 +231,19 @@
     value = 0
   [../]
  [./pressureleft]
-    type = DirichletBC
+    type = HeatFluxBC
     variable = pressure
     boundary = left
     value = 0
   [../]
   [./pressureright]
-    type = HeatFluxBC
+    type = DirichletBC
     variable = pressure
     boundary = right
     value = 0
   [../]
   [./pressuretop]
-    type = DirichletBC
+    type = HeatFluxBC
     variable = pressure
     boundary = top
     value = 0

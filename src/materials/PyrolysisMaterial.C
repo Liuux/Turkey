@@ -120,6 +120,9 @@ void PyrolysisMaterial::computeProperties()
 	  _property[qp]._vm_x = _vm_x_value[qp];
 	  _property[qp]._vm_y = _vm_y_value[qp];
 	  _property[qp]._vm_z = _vm_z_value[qp];
+	  _property[qp]._vm(0) = _property[qp]._vm_x;
+	  _property[qp]._vm(1) = _property[qp]._vm_y;
+	  _property[qp]._vm(2) = _property[qp]._vm_z;
 
 
 	  Real epsi = 1E-08;
