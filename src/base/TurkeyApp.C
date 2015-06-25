@@ -9,8 +9,10 @@
 #include "DarcyPressure.h"
 #include "GasConvection.h"
 #include "CoordMoveConvection.h"
+#include "DisplaceTimeDerivative.h"
 
 #include "PyrolysisMaterial.h"
+#include "IntegratedBCMaterial.h"
 
 
 #include "IsoThermalBC.h"
@@ -18,6 +20,7 @@
 #include "HeatTransferBC.h"
 #include "HeatRadiationBC.h"
 #include "PostprocessorFluxBC.h"
+#include "SurfaceRecessionBC.h"
 
 #include "PyrolysisGasVelocity.h"
 #include "PyrolysisRate.h"
@@ -73,14 +76,17 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerKernel(DarcyPressure);
 	registerKernel(GasConvection);
 	registerKernel(CoordMoveConvection);
+	registerKernel(DisplaceTimeDerivative);
 
 	registerMaterial(PyrolysisMaterial);
+	registerMaterial(IntegratedBCMaterial);
 
 	registerBoundaryCondition(IsoThermalBC);
     registerBoundaryCondition(HeatFluxBC);
 	registerBoundaryCondition(HeatTransferBC);
 	registerBoundaryCondition(HeatRadiationBC);
 	registerBoundaryCondition(PostprocessorFluxBC);
+	registerBoundaryCondition(SurfaceRecessionBC);
 
 	registerAux(PyrolysisGasVelocity);
 	registerAux(PyrolysisRate);

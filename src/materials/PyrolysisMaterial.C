@@ -24,9 +24,9 @@ InputParameters validParams<PyrolysisMaterial>()
   params.addRequiredCoupledVar("temperature", "Coupled Temperature");
   params.addRequiredCoupledVar("rho", "Coupled Density");
   params.addRequiredCoupledVar("pressure", "gas pressure");
-  params.addCoupledVar("disp_x", "disp_x");
-  params.addCoupledVar("disp_y", "disp_y");
-  params.addCoupledVar("disp_z", "disp_z");
+  params.addCoupledVar("disp_x",0, "disp_x");
+  params.addCoupledVar("disp_y",0, "disp_y");
+  params.addCoupledVar("disp_z",0, "disp_z");
 
   return params;
 }

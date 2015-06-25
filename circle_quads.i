@@ -1,16 +1,14 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  xmin = 0
-  ymin = 0
-  xmax = 0.018
-  ymax = 0.018
-  nx = 30
-  ny = 30
-  elem_type = QUAD4
-  displacements = 'disp_x disp_y'
+  file = circle-quads.e
+  uniform_refine = 2
 []
-
+[MeshModifiers]
+[./block_1]
+  type = Transform
+  transform = SCALE
+  vector_value = '0.01 0.01 0.01'
+[../]
+[]
 [Variables]
   [./temperature]
     family = LAGRANGE
@@ -107,13 +105,13 @@
 [./disp_x_td]
     type = DisplaceTimeDerivative
     variable = disp_x
-    damp = 1000000 
+    damp = 1e+11
     use_displaced_mesh = true
  [../]
  [./disp_y_td]
     type = DisplaceTimeDerivative
     variable = disp_y
-    damp = 1000000 
+    damp = 1e+6
     use_displaced_mesh = true
  [../]
  [./disp_x_diff]
@@ -150,104 +148,30 @@
 []
 
 [BCs]
-  [./left]
+  [./temp1]
     type = HeatFluxBC
     variable = temperature
-    boundary = left
-    value = 0
+    boundary = 1
+    value = 600000
   [../]
-  [./right]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = right
-    value = 0
-  [../]
-  [./top]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = top
-    value = 100000
-  [../]
- [./bottom]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = bottom
-    value = 0
-  [../]
- [./pressureleft]
-    type = HeatFluxBC
-    variable = pressure
-    boundary = left
-    value = 0
-  [../]
-  [./pressureright]
-    type = HeatFluxBC
-    variable = pressure
-    boundary = right
-    value = 0
-  [../]
-  [./pressuretop]
+  [./pressure1]
     type = DirichletBC
     variable = pressure
-    boundary = top
+    boundary = 1
     value = 0
   [../]
-  [./pressurebottom]
-    type = HeatFluxBC
-    variable = pressure
-    boundary = bottom
-    value = 0
-  [../]
-
-  [./disp_x_top]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = top 
-    value = 0
-  [../]
-  [./disp_y_top]
+  [./disp_y_1]
     type = SurfaceRecessionBC
     variable = disp_y
-    boundary = top
+    boundary = 1
     component = y
   [../]
-  [./disp_x_left]
+  [./disp_x_1]
     type = SurfaceRecessionBC
     variable = disp_x
-    boundary = left
+    boundary = 1
     component = x
   [../]
-  [./disp_y_left]
-    type = HeatFluxBC
-    variable = disp_y
-    boundary = left
-    value = 0
-  [../]
-  [./disp_x_right]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = right
-    value = 0
-  [../]
-  [./disp_y_right]
-    type = HeatFluxBC
-    variable = disp_y
-    boundary = right
-    value = 0
-  [../]
-  [./disp_x_bottom]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = bottom
-    value = 0
-  [../]
-  [./disp_y_bottom]
-    type = DirichletBC
-    variable = disp_y
-    boundary = bottom
-    value = 0
-  [../]
-
 []
 
 [Materials]
@@ -256,7 +180,7 @@
     temperature = temperature
     rho = rho
     pressure = pressure
-    block = 0
+    block = ANY_BLOCK_ID
     k = 0.75
     cp = 556
     rhov = 1448
@@ -278,8 +202,8 @@
   [../]
   [./bcmaterial]
    type = IntegratedBCMaterial
-   flux = 0.01
-   boundary = 'top bottom left right'
+   flux = 600000
+   boundary = 1
   [../]
 []
 
@@ -316,4 +240,7 @@
     output_on = 'timestep_end failed nonlinear linear'
   [../]
 []
+
+
+
 

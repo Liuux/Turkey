@@ -1,5 +1,5 @@
 [Mesh]
-  type = GeneratedMesh
+  type = circle-quads.e
   dim = 2
   xmin = 0
   ymin = 0

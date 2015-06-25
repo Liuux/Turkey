@@ -1,14 +1,13 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  xmin = 0
-  ymin = 0
-  xmax = 0.018
-  ymax = 0.018
-  nx = 30
-  ny = 30
-  elem_type = QUAD4
-  displacements = 'disp_x disp_y'
+  file =  cylinder-hexes.e
+  uniform_refine = 1
+[]
+[MeshModifiers]
+[./block_1]
+  type = Transform
+  transform = SCALE
+  vector_value = '0.001 0.001 0.001'
+[../]
 []
 
 [Variables]
@@ -16,19 +15,13 @@
     family = LAGRANGE
     order = FIRST
   [../]
-  [./rho]
+[./rho]
     family = LAGRANGE
     order = FIRST
   [../]
-  [./pressure]
+[./pressure]
     family = LAGRANGE
     order = FIRST
-  [../]
-  [./disp_x]
-  [../]
-  [./disp_y]
-  [../]
-  [./disp_z]
   [../]
 []
 
@@ -59,12 +52,12 @@
     type = ConstantIC
     value = 300
   [../]
-  [./rho_ic]
+[./rho_ic]
     variable = rho
     type = ConstantIC
     value = 1448
   [../]
-  [./pressure_ic]
+[./pressure_ic]
     variable = pressure
     type = ConstantIC
     value = 0
@@ -75,7 +68,6 @@
   [./temporal]
     type = TemperatureTimeDerivative
     variable = temperature
-    use_displaced_mesh = true
   [../]
   [./diff]
     type = HeatConductionKernel
@@ -89,50 +81,17 @@
     type = GasConvection
     variable = temperature
   [../]
-  [./CoordMoveConvection]
-    type = CoordMoveConvection
-    variable = temperature
-  [../]
-
   [./density]
     type = DensitySourceKernel
     variable = rho
   [../]
-
-  [./darcypressure]
+[./darcypressure]
     type = DarcyPressure
     variable = pressure
   [../]
-
-[./disp_x_td]
-    type = DisplaceTimeDerivative
-    variable = disp_x
-    damp = 1000000 
-    use_displaced_mesh = true
- [../]
- [./disp_y_td]
-    type = DisplaceTimeDerivative
-    variable = disp_y
-    damp = 1000000 
-    use_displaced_mesh = true
- [../]
- [./disp_x_diff]
-    type = Diffusion
-    variable = disp_x
-    use_displaced_mesh = true
-  [../]
-  [./disp_y_diff]
-    type = Diffusion
-    variable = disp_y
-    use_displaced_mesh = true
-  [../]
-  [./disp_z_td]
-    type = TimeDerivative
-    variable = disp_z
-    use_displaced_mesh = true
-  [../]
 []
 [AuxKernels]
+ 
   [./gasvelocity_x]
     type = PyrolysisGasVelocity
     variable = GasVelocity_x
@@ -143,111 +102,49 @@
     variable = GasVelocity_y
     component = y
   [../]
-  [./PyrolysisRate]
+ [./PyrolysisRate]
     type = PyrolysisRate
     variable = Rho_dt
   [../]
 []
 
 [BCs]
-  [./left]
+  [./1]
     type = HeatFluxBC
     variable = temperature
-    boundary = left
+    boundary = 1
     value = 0
   [../]
-  [./right]
+  [./2]
     type = HeatFluxBC
     variable = temperature
-    boundary = right
+    boundary = 2
+    value = 120000
+  [../]
+  [./3]
+    type = HeatFluxBC
+    variable = temperature
+    boundary = 3
     value = 0
   [../]
-  [./top]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = top
-    value = 100000
-  [../]
- [./bottom]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = bottom
-    value = 0
-  [../]
- [./pressureleft]
-    type = HeatFluxBC
+ [./pressure1]
+    type = DirichletBC
     variable = pressure
-    boundary = left
+    boundary = 1
     value = 0
   [../]
   [./pressureright]
     type = HeatFluxBC
     variable = pressure
-    boundary = right
+    boundary = 2
     value = 0
   [../]
   [./pressuretop]
-    type = DirichletBC
-    variable = pressure
-    boundary = top
-    value = 0
-  [../]
-  [./pressurebottom]
     type = HeatFluxBC
     variable = pressure
-    boundary = bottom
+    boundary = 3
     value = 0
   [../]
-
-  [./disp_x_top]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = top 
-    value = 0
-  [../]
-  [./disp_y_top]
-    type = SurfaceRecessionBC
-    variable = disp_y
-    boundary = top
-    component = y
-  [../]
-  [./disp_x_left]
-    type = SurfaceRecessionBC
-    variable = disp_x
-    boundary = left
-    component = x
-  [../]
-  [./disp_y_left]
-    type = HeatFluxBC
-    variable = disp_y
-    boundary = left
-    value = 0
-  [../]
-  [./disp_x_right]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = right
-    value = 0
-  [../]
-  [./disp_y_right]
-    type = HeatFluxBC
-    variable = disp_y
-    boundary = right
-    value = 0
-  [../]
-  [./disp_x_bottom]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = bottom
-    value = 0
-  [../]
-  [./disp_y_bottom]
-    type = DirichletBC
-    variable = disp_y
-    boundary = bottom
-    value = 0
-  [../]
-
 []
 
 [Materials]
@@ -256,7 +153,7 @@
     temperature = temperature
     rho = rho
     pressure = pressure
-    block = 0
+    block = ANY_BLOCK_ID
     k = 0.75
     cp = 556
     rhov = 1448
@@ -272,14 +169,6 @@
                     0 0 0'
     viscosity = 1.98e-5
     porosity = 0.3 
-    disp_x = disp_x
-    disp_y = disp_y
-    disp_z = disp_z
-  [../]
-  [./bcmaterial]
-   type = IntegratedBCMaterial
-   flux = 0.01
-   boundary = 'top bottom left right'
   [../]
 []
 
@@ -287,7 +176,7 @@
   type = Transient
   solve_type = newton
   scheme = bdf2
-  dt = 1E-02
+  dt = 1E-01
   num_steps = 5000
 
   l_tol = 1e-04

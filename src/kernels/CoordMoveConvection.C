@@ -19,11 +19,11 @@ CoordMoveConvection::computeQpResidual()
 {
   Real r(0);
   r =_property[_qp]._vm*_property[_qp]._Rho*_property[_qp]._cp*_property[_qp]._gradient_T*_test[_i][_qp];
-  return -r;
+  return r;
 }
 Real CoordMoveConvection::computeQpJacobian()
 {
-  return -_property[_qp]._vm*_property[_qp]._Rho*_property[_qp]._cp*_test[_i][_qp]*_grad_phi[_j][_qp];
+  return _property[_qp]._vm*_property[_qp]._Rho*_property[_qp]._cp*_test[_i][_qp]*_grad_phi[_j][_qp];
 }
 Real  CoordMoveConvection::computeQpOffDiagJacobian(unsigned int jvar)
  {
@@ -31,7 +31,7 @@ Real  CoordMoveConvection::computeQpOffDiagJacobian(unsigned int jvar)
 
 	 if ( jvar == _property[_qp]._Rho_num)
 	    {
-	 	  return -_property[_qp]._vm*_property[_qp]._cp*_property[_qp]._gradient_T*_test[_i][_qp]*_phi[_j][_qp];
+	 	  return _property[_qp]._vm*_property[_qp]._cp*_property[_qp]._gradient_T*_test[_i][_qp]*_phi[_j][_qp];
 		  }
 		 else
 		  {
