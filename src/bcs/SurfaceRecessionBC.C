@@ -12,12 +12,20 @@ InputParameters validParams<SurfaceRecessionBC>()
 SurfaceRecessionBC::SurfaceRecessionBC(const std::string & name, InputParameters parameters) :
   IntegratedBC(name, parameters),
    _bcproperty(getMaterialProperty<BCProperty>("bcproperty")),
+   _property(getMaterialProperty<PropertyPack>("property")),
    _component(getParam<MooseEnum>("component"))
 {}
 
 Real SurfaceRecessionBC::computeQpResidual()
 {
-     return _test[_i][_qp]*_bcproperty[_qp]._flux*_normals[_qp](_component);
-//     return -_test[_i][_qp] * _normals[_qp](_component)/50;
+	if (abs(_property[_qp]._Rho - _property[_qp]._rhoc)<50)
+			{
+
+				return _test[_i][_qp]*_bcproperty[_qp]._flux*_normals[_qp](_component)/10000000;
+			}
+	else
+	       {
+		        return 0;
+	       }
 }
 

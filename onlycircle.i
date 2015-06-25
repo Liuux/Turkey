@@ -1,16 +1,14 @@
 [Mesh]
-  type = GeneratedMesh
-  dim = 2
-  xmin = 0
-  ymin = 0
-  xmax = 0.018
-  ymax = 0.018
-  nx = 30
-  ny = 30
-  elem_type = QUAD4
-  displacements = 'disp_x disp_y'
+  file = circle-quads.e
+  uniform_refine = 2
 []
-
+[MeshModifiers]
+[./block_1]
+  type = Transform
+  transform = SCALE
+  vector_value = '0.01 0.01 0.01'
+[../]
+[]
 [Variables]
   [./disp_x]
   [../]
@@ -19,21 +17,17 @@
   [./disp_z]
   [../]
 []
-
-[ICs]
-[]
-
 [Kernels]
- [./disp_x_td]
+[./disp_x_td]
     type = DisplaceTimeDerivative
     variable = disp_x
-    damp = 1e+5
+    damp = 100000
     use_displaced_mesh = true
  [../]
  [./disp_y_td]
     type = DisplaceTimeDerivative
     variable = disp_y
-    damp = 1e+5
+    damp = 100000
     use_displaced_mesh = true
  [../]
  [./disp_x_diff]
@@ -52,64 +46,26 @@
     use_displaced_mesh = true
   [../]
 []
-
 [BCs]
-  [./disp_x_top]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = top 
-    value = 0
-  [../]
-  [./disp_y_top]
+  [./disp_y_1]
     type = SurfaceRecessionBC
     variable = disp_y
-    boundary = top
+    boundary = 1
     component = y
   [../]
-  [./disp_x_left]
-    type = HeatFluxBC
+  [./disp_x_1]
+    type = SurfaceRecessionBC
     variable = disp_x
-    boundary = left
-    value = 0
+    boundary = 1
+    component = x
   [../]
-  [./disp_y_left]
-    type = HeatFluxBC
-    variable = disp_y
-    boundary = left
-    value = 0
-  [../]
-  [./disp_x_right]
-    type = HeatFluxBC
-    variable = disp_x
-    boundary = right
-    value = 0
-  [../]
-  [./disp_y_right]
-    type = HeatFluxBC
-    variable = disp_y
-    boundary = right
-    value = 0
-  [../]
-  [./disp_x_bottom]
-    type = DirichletBC
-    variable = disp_x
-    boundary = bottom
-    value = 0
-  [../]
-  [./disp_y_bottom]
-    type = DirichletBC
-    variable = disp_y
-    boundary = bottom
-    value = 0
-  [../]
-
 []
 
 [Materials]
   [./bcmaterial]
    type = IntegratedBCMaterial
    flux = 600000
-   boundary = 'top bottom left right'
+   boundary = 1
   [../]
 []
 
@@ -146,4 +102,7 @@
     output_on = 'timestep_end failed nonlinear linear'
   [../]
 []
+
+
+
 

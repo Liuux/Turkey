@@ -3,6 +3,7 @@
 
 #include "IntegratedBC.h"
 #include "IntegratedBCMaterial.h"
+#include "PyrolysisMaterial.h"
 
 class SurfaceRecessionBC : public IntegratedBC
 {
@@ -11,6 +12,7 @@ public:
 protected:
 	virtual Real computeQpResidual();
 	MaterialProperty<BCProperty> & _bcproperty;
+	MaterialProperty<PropertyPack> & _property;
 	int _component;
 };
 

@@ -105,13 +105,13 @@
 [./disp_x_td]
     type = DisplaceTimeDerivative
     variable = disp_x
-    damp = 1e+11
+    damp = 100000
     use_displaced_mesh = true
  [../]
  [./disp_y_td]
     type = DisplaceTimeDerivative
     variable = disp_y
-    damp = 1e+6
+    damp = 100000
     use_displaced_mesh = true
  [../]
  [./disp_x_diff]
@@ -215,7 +215,7 @@
   num_steps = 5000
 
   l_tol = 1e-04
-  nl_rel_tol = 1e-06
+  nl_rel_tol = 1e-04
   l_max_its = 10
   nl_max_its = 10
   petsc_options_iname = '-pc_type -pc_hypre_type'
