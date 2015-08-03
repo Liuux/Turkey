@@ -20,6 +20,7 @@ Real DarcyPressure::computeQpResidual()
   Real r2(0);
   r1 =  _property[_qp]._rhog*_property[_qp]._permeability/_property[_qp]._viscosity/_property[_qp]._porosity*_property[_qp]._gradient_Pressure*_grad_test[_i][_qp];
   r2 = _property[_qp]._Source*_test[_i][_qp];
+//  r2 = 0.01*_test[_i][_qp];
   return (r1-r2);
 
 }

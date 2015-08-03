@@ -11,8 +11,8 @@ public:
 	SurfaceRecessionBC(const std::string & name, InputParameters parameters);
 protected:
 	virtual Real computeQpResidual();
-	MaterialProperty<BCProperty> & _bcproperty;
-	MaterialProperty<PropertyPack> & _property;
+	const MaterialProperty<BCProperty> & _bcproperty;
+	const MaterialProperty<PropertyPack> & _property;
 	int _component;
 };
 

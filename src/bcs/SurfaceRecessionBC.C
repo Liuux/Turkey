@@ -18,10 +18,10 @@ SurfaceRecessionBC::SurfaceRecessionBC(const std::string & name, InputParameters
 
 Real SurfaceRecessionBC::computeQpResidual()
 {
-	if (abs(_property[_qp]._Rho - _property[_qp]._rhoc)<50)
+	if (abs(_property[_qp]._Rho - _property[_qp]._rhoc)<10)
 			{
 
-				return _test[_i][_qp]*_bcproperty[_qp]._flux*_normals[_qp](_component)/10000000;
+				return _test[_i][_qp]*_bcproperty[_qp]._flux*_normals[_qp](_component)/4000000;
 			}
 	else
 	       {

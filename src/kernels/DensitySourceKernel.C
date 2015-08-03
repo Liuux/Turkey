@@ -17,7 +17,7 @@ DensitySourceKernel::DensitySourceKernel(const std::string & name, InputParamete
 
 Real DensitySourceKernel::Source(Real rho,Real T,Real rhoc,Real rhov,Real precoff, Real ER,Real m)
 {
-	if (T>600)
+	if (T>300)
 	{
 		if ((rho-rhoc)<1)
 		{

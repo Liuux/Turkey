@@ -1,7 +1,7 @@
 #include "TurkeyApp.h"
 #include "Moose.h"
 #include "AppFactory.h"
-#include "ModulesApp.h"
+//#include "ModulesApp.h"
 #include "HeatConductionKernel.h"
 #include "TemperatureTimeDerivative.h"
 #include "DensitySourceKernel.h"
@@ -18,7 +18,6 @@
 #include "IsoThermalBC.h"
 #include "HeatFluxBC.h"
 #include "HeatTransferBC.h"
-#include "HeatRadiationBC.h"
 #include "PostprocessorFluxBC.h"
 #include "SurfaceRecessionBC.h"
 
@@ -44,11 +43,11 @@ TurkeyApp::TurkeyApp(const std::string & name, InputParameters parameters) :
   srand(processor_id());
 
   Moose::registerObjects(_factory);
-  ModulesApp::registerObjects(_factory);
+//  ModulesApp::registerObjects(_factory);
   TurkeyApp::registerObjects(_factory);
 
   Moose::associateSyntax(_syntax, _action_factory);
-  ModulesApp::associateSyntax(_syntax, _action_factory);
+//  ModulesApp::associateSyntax(_syntax, _action_factory);
   TurkeyApp::associateSyntax(_syntax, _action_factory);
 }
 
@@ -84,7 +83,6 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerBoundaryCondition(IsoThermalBC);
     registerBoundaryCondition(HeatFluxBC);
 	registerBoundaryCondition(HeatTransferBC);
-	registerBoundaryCondition(HeatRadiationBC);
 	registerBoundaryCondition(PostprocessorFluxBC);
 	registerBoundaryCondition(SurfaceRecessionBC);
 

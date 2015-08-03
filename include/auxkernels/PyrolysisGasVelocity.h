@@ -17,7 +17,7 @@ public:
 protected:
   virtual Real computeValue();
   int _component;
-  MaterialProperty<PropertyPack> & _property;
+  const MaterialProperty<PropertyPack> & _property;
 };
 
 

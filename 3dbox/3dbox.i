@@ -1,12 +1,23 @@
 [Mesh]
-  file = circle-quads.e
-  uniform_refine = 2
+  type = GeneratedMesh
+  dim = 3
+  xmin = -0.005
+  xmax =  0.005
+  ymin = -0.005
+  ymax =  0.005
+  zmin = -0.005
+  zmax =  0.005
+  nx = 20
+  ny = 20
+  nz = 20
+  displacements = 'disp_x disp_y disp_z'
+  elem_type = HEX
 []
 [MeshModifiers]
 [./block_1]
   type = Transform
   transform = SCALE
-  vector_value = '0.01 0.01 0.01'
+  vector_value = '1 1 1'
 [../]
 []
 [Variables]
@@ -105,13 +116,19 @@
 [./disp_x_td]
     type = DisplaceTimeDerivative
     variable = disp_x
-    damp = 4000000
+    damp = 8000000
     use_displaced_mesh = true
  [../]
  [./disp_y_td]
     type = DisplaceTimeDerivative
     variable = disp_y
-    damp = 4000000
+    damp = 8000000
+    use_displaced_mesh = true
+ [../]
+ [./disp_z_td]
+    type = DisplaceTimeDerivative
+    variable = disp_z
+    damp = 8000000
     use_displaced_mesh = true
  [../]
  [./disp_x_diff]
@@ -124,8 +141,8 @@
     variable = disp_y
     use_displaced_mesh = true
   [../]
-  [./disp_z_td]
-    type = TimeDerivative
+  [./disp_z_diff]
+    type = Diffusion
     variable = disp_z
     use_displaced_mesh = true
   [../]
@@ -148,29 +165,95 @@
 []
 
 [BCs]
-  [./temp1]
+  [./left]
     type = HeatFluxBC
     variable = temperature
-    boundary = 1
-    value = 200000
+    boundary = left
+    value = 100000
   [../]
-  [./pressure1]
+  [./right]
+   type = HeatFluxBC
+    variable = temperature
+    boundary = right
+    value = 0
+  [../]
+  [./top]
+    type = HeatFluxBC
+    variable = temperature
+    boundary = top
+    value = 100000
+  [../]
+  [./bottom]
+    type = HeatFluxBC
+    variable = temperature
+    boundary = bottom
+    value = 0
+  [../]
+  [./front]
+    type = HeatFluxBC
+    variable = temperature
+    boundary = front
+    value = 100000
+  [../]
+  [./back]
+    type = HeatFluxBC
+    variable = temperature
+    boundary = back
+    value = 0
+  [../]
+  [./pressureleft]
     type = DirichletBC
     variable = pressure
-    boundary = 1
+    boundary = left
     value = 1000000
   [../]
-  [./disp_y_1]
+  [./pressureright]
+    type = DirichletBC
+    variable = pressure
+    boundary = right
+    value = 1000000
+  [../]
+  [./pressuretop]
+    type = DirichletBC
+    variable = pressure
+    boundary = top
+    value = 1000000
+  [../]
+  [./pressurebottom]
+    type = DirichletBC
+    variable = pressure
+    boundary = bottom
+    value = 1000000
+  [../]
+  [./pressurefront]
+    type = DirichletBC
+    variable = pressure
+    boundary = front
+    value = 1000000
+  [../]
+  [./pressureback]
+    type = DirichletBC
+    variable = pressure
+    boundary = back
+    value = 1000000
+  [../]
+  [./disp_y_top]
     type = SurfaceRecessionBC
     variable = disp_y
-    boundary = 1
+    boundary = 'top bottom left right front back'
     component = y
   [../]
-  [./disp_x_1]
+  [./disp_x_top]
     type = SurfaceRecessionBC
     variable = disp_x
-    boundary = 1
+    boundary = 'top bottom left right front back'
     component = x
+  [../]
+  [./disp_z_top]
+    type = SurfaceRecessionBC
+    variable = disp_z
+    boundary = 'top bottom left right front back'
+    component = z
   [../]
 []
 
@@ -200,10 +283,25 @@
     disp_y = disp_y
     disp_z = disp_z
   [../]
-  [./bcmaterial]
+  [./bcmaterial1]
    type = IntegratedBCMaterial
-   flux = 1000000
-   boundary = 1
+   flux = 100000
+   boundary = top
+  [../]
+  [./bcmaterial2]
+   type = IntegratedBCMaterial
+   flux = 100000
+   boundary = left
+  [../]
+  [./bcmaterial3]
+   type = IntegratedBCMaterial
+   flux = 100000
+   boundary = front
+  [../]
+  [./bcmaterial4]
+   type = IntegratedBCMaterial
+   flux = 0
+   boundary = 'bottom right back'
   [../]
 []
 
@@ -211,12 +309,12 @@
   type = Transient
   solve_type = newton
   scheme = bdf2
-  dt = 0.01
+  dt = 0.1
   num_steps = 5000
 
   l_tol = 1e-04
   nl_rel_tol = 1e-04
-  l_max_its = 8
+  l_max_its = 12
   nl_max_its = 8
   petsc_options_iname = '-pc_type -pc_hypre_type'
   petsc_options_value = 'hypre boomeramg'

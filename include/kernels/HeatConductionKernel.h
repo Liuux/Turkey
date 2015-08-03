@@ -15,7 +15,7 @@ protected:
   virtual Real computeQpJacobian();
 
 private:
-  MaterialProperty<PropertyPack> & _property;
+ const MaterialProperty<PropertyPack> & _property;
 };
 
 template<>
