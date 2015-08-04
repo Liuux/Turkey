@@ -7,11 +7,11 @@
   ymax =  0.005
   zmin = -0.005
   zmax =  0.005
-  nx = 20
-  ny = 20
-  nz = 20
+  nx = 15
+  ny = 15
+  nz = 15
   displacements = 'disp_x disp_y disp_z'
-  elem_type = HEX
+  elem_type = TET4
 []
 [MeshModifiers]
 [./block_1]
@@ -116,19 +116,19 @@
 [./disp_x_td]
     type = DisplaceTimeDerivative
     variable = disp_x
-    damp = 8000000
+    damp = 50000000
     use_displaced_mesh = true
  [../]
  [./disp_y_td]
     type = DisplaceTimeDerivative
     variable = disp_y
-    damp = 8000000
+    damp = 50000000
     use_displaced_mesh = true
  [../]
  [./disp_z_td]
     type = DisplaceTimeDerivative
     variable = disp_z
-    damp = 8000000
+    damp = 50000000
     use_displaced_mesh = true
  [../]
  [./disp_x_diff]
@@ -264,8 +264,10 @@
     rho = rho
     pressure = pressure
     block = ANY_BLOCK_ID
-    k = 0.75
-    cp = 556
+    kv = 0.75
+    kc = 1.5
+    cpv = 556
+    cpc = 800
     rhov = 1448
     rhoc = 1185
     cpg = 100
@@ -276,7 +278,7 @@
     ER = 10000
     permeability = '8.9e-9 0 0 
                     0 8.9e-9 0
-                    0 0 0'
+                    0 0 8.9e-9'
     viscosity = 1.98e-5
     porosity = 0.3 
     disp_x = disp_x

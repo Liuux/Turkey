@@ -11,7 +11,6 @@
   ny = 20
   nz = 20
  displacements = 'disp_x disp_y disp_z'
- elem_type=QUAD16
 []
 [MeshModifiers]
 [./block_1]

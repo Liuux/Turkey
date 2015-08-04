@@ -12,6 +12,7 @@ public :
 	Real  _cp;
     Real  _rhov;
 	Real  _rhoc;
+	Real  _charpercent;
 	Real  _cpg;
 	Real  _rhog;
 	Real  _deltaH;
@@ -68,8 +69,10 @@ protected:
   VariableValue & _Pressure_value;
   VariableGradient & _gradient_Pressure_value;
   //get properties
-  Real  _k_value;
-  Real  _cp_value;
+  Real  _kv_value;
+  Real  _kc_value;
+  Real  _cpv_value;
+  Real  _cpc_value;
   Real  _rhov_value;
   Real  _rhoc_value;
   Real  _cpg_value;
