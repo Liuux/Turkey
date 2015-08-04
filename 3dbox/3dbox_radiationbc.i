@@ -297,12 +297,12 @@
   [../]
   [./bcmaterial2]
    type = IntegratedBCMaterial
-   flux = 100000
+   flux = 0
    boundary = left
   [../]
   [./bcmaterial3]
    type = IntegratedBCMaterial
-   flux = 100000
+   flux = 0
    boundary = front
   [../]
   [./bcmaterial4]

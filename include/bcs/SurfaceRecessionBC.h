@@ -13,6 +13,9 @@ protected:
 	virtual Real computeQpResidual();
 	const MaterialProperty<BCProperty> & _bcproperty;
 	const MaterialProperty<PropertyPack> & _property;
+	const MaterialProperty<Real> & _flux;
+	const MaterialProperty<Real> & _flux_jacobi;
+
 	int _component;
 };
 
