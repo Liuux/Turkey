@@ -8,6 +8,7 @@ class PropertyPack
 {
 public :
 // properties
+	Real  _sigma;
 	Real  _k;
 	Real  _cp;
     Real  _rhov;
@@ -69,6 +70,7 @@ protected:
   VariableValue & _Pressure_value;
   VariableGradient & _gradient_Pressure_value;
   //get properties
+  Real  _sigma_value;
   Real  _kv_value;
   Real  _kc_value;
   Real  _cpv_value;

@@ -8,6 +8,7 @@ InputParameters validParams<PyrolysisMaterial>()
 {
   InputParameters params = validParams<Material>();
 
+  params.addParam<Real>("sigma", "sigma");
   params.addParam<Real>("kv", "kv");
   params.addParam<Real>("kc", "kc");
   params.addParam<Real>("cpv", "cpv");
@@ -72,6 +73,7 @@ PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters p
 	  _vm_z_value(coupledDot("disp_z"))
 
 {
+	_sigma_value = getParam<Real>("sigma");
 	_kv_value = getParam<Real>("kv");
 	_kc_value = getParam<Real>("kc");
 	_cpv_value = (getParam<Real>("cpv"));
@@ -94,6 +96,7 @@ void PyrolysisMaterial::computeProperties()
   Real epsi = 1E-08;
   for (unsigned int qp(0); qp < _qrule->n_points(); ++qp)
   {
+	  _property[qp]._sigma = _sigma_value;
 	  _property[qp]._charpercent = _rhov_value/(_rhov_value-_rhoc_value)*(1-_rhoc_value/_Rho_value[qp]);
 	  _property[qp]._k = _kv_value*_property[qp]._charpercent+(1-_property[qp]._charpercent)*_kc_value;
 	  _property[qp]._cp = _cpv_value*_property[qp]._charpercent+(1-_property[qp]._charpercent)*_cpc_value;

@@ -13,6 +13,7 @@
 
 #include "PyrolysisMaterial.h"
 #include "IntegratedBCMaterial.h"
+#include "HeatFluxMaterial.h"
 
 
 #include "IsoThermalBC.h"
@@ -20,6 +21,7 @@
 #include "HeatTransferBC.h"
 #include "PostprocessorFluxBC.h"
 #include "SurfaceRecessionBC.h"
+#include "HeatRadiationBC.h"
 
 #include "PyrolysisGasVelocity.h"
 #include "PyrolysisRate.h"
@@ -79,12 +81,14 @@ TurkeyApp::registerObjects(Factory & factory)
 
 	registerMaterial(PyrolysisMaterial);
 	registerMaterial(IntegratedBCMaterial);
+	registerMaterial(HeatFluxMaterial);
 
 	registerBoundaryCondition(IsoThermalBC);
     registerBoundaryCondition(HeatFluxBC);
 	registerBoundaryCondition(HeatTransferBC);
 	registerBoundaryCondition(PostprocessorFluxBC);
 	registerBoundaryCondition(SurfaceRecessionBC);
+	registerBoundaryCondition(HeatRadiationBC);
 
 	registerAux(PyrolysisGasVelocity);
 	registerAux(PyrolysisRate);
