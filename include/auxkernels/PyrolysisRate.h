@@ -10,7 +10,7 @@ InputParameters validParams<PyrolysisRate>();
 class PyrolysisRate : public AuxKernel
 {
 public:
-	PyrolysisRate(const std::string & name, InputParameters parameters);
+	PyrolysisRate(const InputParameters & parameters);
 
     virtual ~PyrolysisRate() {}
 

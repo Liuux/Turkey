@@ -52,8 +52,8 @@ Real PyrolysisMaterial::Source(Real rho,Real T,Real rhoc,Real rhov,Real precoff,
 		return 0;
 	}
 }
-PyrolysisMaterial::PyrolysisMaterial(const std::string & name, InputParameters parameters) :
-      Material(name, parameters),
+PyrolysisMaterial::PyrolysisMaterial(const InputParameters & parameters) :
+      Material(parameters),
 	  _property(declareProperty<PropertyPack>("property")),
 	  _T_value(coupledValue("temperature")),
       _gradient_T_value(coupledGradient("temperature")),

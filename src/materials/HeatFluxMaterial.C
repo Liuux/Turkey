@@ -21,8 +21,8 @@ InputParameters validParams<HeatFluxMaterial>()
   return params;
 }
 
-HeatFluxMaterial::HeatFluxMaterial(const std::string & name, InputParameters parameters) :
-      Material(name, parameters),
+HeatFluxMaterial::HeatFluxMaterial(const InputParameters & parameters) :
+      Material(parameters),
     _property(getMaterialProperty<PropertyPack>("property")),
     _flux(declareProperty<Real>("heat_flux")),
     _flux_jacobi(declareProperty<Real>("heat_flux_jacobi")),

@@ -6,7 +6,7 @@ class CoordMoveConvection : public Kernel
 {
 public:
 
-	CoordMoveConvection(const std::string & name, InputParameters parameters);
+	CoordMoveConvection(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual();

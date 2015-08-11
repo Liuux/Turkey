@@ -14,7 +14,7 @@ class Function;
 class IntegratedBCMaterial : public Material
 {
 public:
-	IntegratedBCMaterial(const std::string & name, InputParameters parameters);
+	IntegratedBCMaterial(const InputParameters & parameters);
 
 protected:
   virtual void computeProperties();

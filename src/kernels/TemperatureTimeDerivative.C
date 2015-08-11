@@ -7,8 +7,8 @@ InputParameters validParams<TemperatureTimeDerivative>()
   return params;
 }
 
-TemperatureTimeDerivative::TemperatureTimeDerivative(const std::string & name, InputParameters parameters) :
-    TimeDerivative(name, parameters),
+TemperatureTimeDerivative::TemperatureTimeDerivative(const InputParameters & parameters) :
+    TimeDerivative(parameters),
 	 _Property(getMaterialProperty<PropertyPack>("property"))
 {
 }

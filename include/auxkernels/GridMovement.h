@@ -9,7 +9,7 @@ InputParameters validParams<GridMovement>();
 class GridMovement : public AuxKernel
 {
 public:
-	GridMovement(const std::string & name, InputParameters parameters);
+	GridMovement(const InputParameters & parameters);
 
     virtual ~GridMovement() {}
 

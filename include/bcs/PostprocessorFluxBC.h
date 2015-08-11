@@ -6,7 +6,7 @@
 class PostprocessorFluxBC : public IntegratedBC
 {
 public:
-	PostprocessorFluxBC(const std::string & name, InputParameters parameters);
+	PostprocessorFluxBC(const InputParameters & parameters);
 protected:
 	virtual Real computeQpResidual();
 	const Real & _value;

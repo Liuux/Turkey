@@ -8,7 +8,7 @@ class HeatConductionKernel : public Kernel
 {
 public:
 
-HeatConductionKernel(const std::string & name, InputParameters parameters);
+HeatConductionKernel(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual();

@@ -12,8 +12,8 @@ InputParameters validParams<PostprocessorFluxBC>()
 }
 
 
-PostprocessorFluxBC::PostprocessorFluxBC(const std::string & name, InputParameters params) :
-    IntegratedBC(name, params),
+PostprocessorFluxBC::PostprocessorFluxBC(const InputParameters & params) :
+    IntegratedBC(params),
     _value(getPostprocessorValue("postprocessor"))
 {
 }

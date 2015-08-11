@@ -11,7 +11,7 @@ InputParameters validParams<DisplaceTimeDerivative>();
 class DisplaceTimeDerivative : public TimeKernel
 {
 public:
-	DisplaceTimeDerivative(const std::string & name, InputParameters parameters);
+	DisplaceTimeDerivative(const InputParameters & parameters);
 
   virtual void computeJacobian();
 

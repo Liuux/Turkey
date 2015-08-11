@@ -12,8 +12,8 @@ InputParameters validParams<PyrolysisGasVelocity>()
   return params;
 }
 
-PyrolysisGasVelocity::PyrolysisGasVelocity(const std::string & name, InputParameters parameters) :
-    AuxKernel(name, parameters),
+PyrolysisGasVelocity::PyrolysisGasVelocity(const InputParameters & parameters) :
+    AuxKernel(parameters),
 
     _component(getParam<MooseEnum>("component")),
     _property(getMaterialProperty<PropertyPack>("property"))

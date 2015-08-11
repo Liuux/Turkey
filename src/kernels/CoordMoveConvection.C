@@ -8,8 +8,8 @@ InputParameters validParams<CoordMoveConvection>()
   return params;
 }
 
-CoordMoveConvection::CoordMoveConvection(const std::string & name, InputParameters parameters) :
-		Kernel(name, parameters),
+CoordMoveConvection::CoordMoveConvection(const InputParameters & parameters) :
+		Kernel(parameters),
       _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

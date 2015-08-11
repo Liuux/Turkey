@@ -10,8 +10,8 @@ InputParameters validParams<DisplaceTimeDerivative>()
   return params;
 }
 
-DisplaceTimeDerivative::DisplaceTimeDerivative(const std::string & name, InputParameters parameters) :
-    TimeKernel(name, parameters),
+DisplaceTimeDerivative::DisplaceTimeDerivative(const InputParameters & parameters) :
+    TimeKernel(parameters),
     _lumping(getParam<bool>("lumping")),
 	_damp(getParam<Real>("damp"))
 {

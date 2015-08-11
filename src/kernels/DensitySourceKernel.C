@@ -8,8 +8,8 @@ InputParameters validParams<DensitySourceKernel>()
   return params;
 }
 
-DensitySourceKernel::DensitySourceKernel(const std::string & name, InputParameters parameters) :
-     Kernel(name, parameters),
+DensitySourceKernel::DensitySourceKernel(const InputParameters & parameters) :
+     Kernel(parameters),
 	 _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

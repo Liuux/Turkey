@@ -8,8 +8,8 @@ InputParameters validParams<PyrolysisSourceKernel>()
   return params;
 }
 
-PyrolysisSourceKernel::PyrolysisSourceKernel(const std::string & name, InputParameters parameters) :
-     Kernel(name, parameters),
+PyrolysisSourceKernel::PyrolysisSourceKernel(const InputParameters & parameters) :
+     Kernel(parameters),
 	 _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

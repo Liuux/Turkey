@@ -8,7 +8,7 @@
 class TemperatureTimeDerivative : public TimeDerivative
 {
 public:
-	TemperatureTimeDerivative(const std::string & name, InputParameters parameters);
+	TemperatureTimeDerivative(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual();

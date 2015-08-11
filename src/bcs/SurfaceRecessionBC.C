@@ -9,8 +9,8 @@ InputParameters validParams<SurfaceRecessionBC>()
   return params;
 }
 
-SurfaceRecessionBC::SurfaceRecessionBC(const std::string & name, InputParameters parameters) :
-  IntegratedBC(name, parameters),
+SurfaceRecessionBC::SurfaceRecessionBC(const InputParameters & parameters) :
+  IntegratedBC(parameters),
    _bcproperty(getMaterialProperty<BCProperty>("bcproperty")),
    _property(getMaterialProperty<PropertyPack>("property")),
    _flux(getMaterialProperty<Real>("heat_flux")),
