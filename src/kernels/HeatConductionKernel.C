@@ -8,8 +8,8 @@ InputParameters validParams<HeatConductionKernel>()
   return params;
 }
 
-HeatConductionKernel::HeatConductionKernel(const std::string & name, InputParameters parameters) :
-  Kernel(name, parameters),
+HeatConductionKernel::HeatConductionKernel(const InputParameters & parameters) :
+  Kernel(parameters),
   _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

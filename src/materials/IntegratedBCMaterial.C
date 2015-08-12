@@ -11,8 +11,8 @@ InputParameters validParams<IntegratedBCMaterial>()
   return params;
 }
 
-IntegratedBCMaterial::IntegratedBCMaterial(const std::string & name, InputParameters parameters) :
-      Material(name, parameters),
+IntegratedBCMaterial::IntegratedBCMaterial(const InputParameters & parameters) :
+      Material(parameters),
 	  _bcproperty( declareProperty<BCProperty>("bcproperty"))
 {
 	_flux_value = getParam<Real> ("flux");

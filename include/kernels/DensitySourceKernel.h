@@ -6,7 +6,7 @@ class DensitySourceKernel : public Kernel
 {
 public:
 
-DensitySourceKernel(const std::string & name, InputParameters parameters);
+DensitySourceKernel(const InputParameters & parameters);
 protected:
   Real Source(Real rho,Real T,Real rhoc,Real rhov,Real precoff, Real ER,Real m);
   virtual Real computeQpResidual();

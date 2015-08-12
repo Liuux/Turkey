@@ -8,8 +8,8 @@ InputParameters validParams<DarcyPressure>()
   return params;
 }
 
-DarcyPressure::DarcyPressure(const std::string & name, InputParameters parameters) :
-     Kernel(name, parameters),
+DarcyPressure::DarcyPressure(const InputParameters & parameters) :
+     Kernel(parameters),
 	 _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

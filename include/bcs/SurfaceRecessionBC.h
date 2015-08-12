@@ -8,7 +8,7 @@
 class SurfaceRecessionBC : public IntegratedBC
 {
 public:
-	SurfaceRecessionBC(const std::string & name, InputParameters parameters);
+	SurfaceRecessionBC(const InputParameters & parameters);
 protected:
 	virtual Real computeQpResidual();
 	const MaterialProperty<BCProperty> & _bcproperty;

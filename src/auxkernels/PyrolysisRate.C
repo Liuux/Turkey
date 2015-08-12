@@ -9,8 +9,8 @@ InputParameters validParams<PyrolysisRate>()
   return params;
 }
 
-PyrolysisRate::PyrolysisRate(const std::string & name, InputParameters parameters) :
-    AuxKernel(name, parameters),
+PyrolysisRate::PyrolysisRate(const InputParameters & parameters) :
+    AuxKernel(parameters),
     _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

@@ -11,8 +11,8 @@ InputParameters validParams<GridMovement>()
   return params;
 }
 
-GridMovement::GridMovement(const std::string & name, InputParameters parameters) :
-    AuxKernel(name, parameters),
+GridMovement::GridMovement(const InputParameters & parameters) :
+    AuxKernel(parameters),
 	_component(getParam<MooseEnum>("component")),
     _property(getMaterialProperty<PropertyPack>("property"))
 {

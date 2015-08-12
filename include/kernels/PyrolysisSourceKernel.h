@@ -7,7 +7,7 @@ class PyrolysisSourceKernel : public Kernel
 {
 public:
 
-	PyrolysisSourceKernel(const std::string & name, InputParameters parameters);
+	PyrolysisSourceKernel(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual();

@@ -55,7 +55,7 @@ class Function;
 class PyrolysisMaterial : public Material
 {
 public:
-	PyrolysisMaterial(const std::string & name, InputParameters parameters);
+	PyrolysisMaterial(const InputParameters & parameters);
 
 protected:
 	Real Source(Real rho,Real T,Real rhoc,Real rhov,Real precoff, Real ER,Real m);

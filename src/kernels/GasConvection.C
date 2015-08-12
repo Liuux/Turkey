@@ -8,8 +8,8 @@ InputParameters validParams<GasConvection>()
   return params;
 }
 
-GasConvection::GasConvection(const std::string & name, InputParameters parameters) :
-		Kernel(name, parameters),
+GasConvection::GasConvection(const InputParameters & parameters) :
+		Kernel(parameters),
       _property(getMaterialProperty<PropertyPack>("property"))
 {
 }

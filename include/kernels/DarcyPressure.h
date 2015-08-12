@@ -7,7 +7,7 @@ class DarcyPressure : public Kernel
 {
 public:
 
-	DarcyPressure(const std::string & name, InputParameters parameters);
+	DarcyPressure(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual();
