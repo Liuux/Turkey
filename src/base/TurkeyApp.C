@@ -10,10 +10,12 @@
 #include "GasConvection.h"
 #include "CoordMoveConvection.h"
 #include "DisplaceTimeDerivative.h"
+#include"DisplayDiffusion.h"
 
 #include "PyrolysisMaterial.h"
 #include "IntegratedBCMaterial.h"
 #include "HeatFluxMaterial.h"
+#include "GiveHeatFluxMaterial.h"
 
 
 #include "IsoThermalBC.h"
@@ -22,10 +24,13 @@
 #include "PostprocessorFluxBC.h"
 #include "SurfaceRecessionBC.h"
 #include "HeatRadiationBC.h"
+#include "NormalRecessionBC.h"
 
 #include "PyrolysisGasVelocity.h"
 #include "PyrolysisRate.h"
 #include "GridMovement.h"
+#include "HeatFluxAuxKernel.h"
+
 
 
 
@@ -42,6 +47,7 @@ InputParameters validParams<TurkeyApp>()
 TurkeyApp::TurkeyApp(InputParameters parameters) :
     MooseApp(parameters)
 {
+  srand(processor_id());
 
   Moose::registerObjects(_factory);
 //  ModulesApp::registerObjects(_factory);
@@ -77,10 +83,12 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerKernel(GasConvection);
 	registerKernel(CoordMoveConvection);
 	registerKernel(DisplaceTimeDerivative);
+	registerKernel(DisplayDiffusion);
 
 	registerMaterial(PyrolysisMaterial);
 	registerMaterial(IntegratedBCMaterial);
 	registerMaterial(HeatFluxMaterial);
+	registerMaterial(GiveHeatFluxMaterial);
 
 	registerBoundaryCondition(IsoThermalBC);
     registerBoundaryCondition(HeatFluxBC);
@@ -88,10 +96,13 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerBoundaryCondition(PostprocessorFluxBC);
 	registerBoundaryCondition(SurfaceRecessionBC);
 	registerBoundaryCondition(HeatRadiationBC);
+	registerBoundaryCondition(NormalRecessionBC);
 
 	registerAux(PyrolysisGasVelocity);
 	registerAux(PyrolysisRate);
 	registerAux(GridMovement);
+	registerAux(HeatFluxAuxKernel);
+
 
 }
 

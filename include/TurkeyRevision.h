@@ -3,6 +3,6 @@
 #ifndef TURKEY_REVISION_H
 #define TURKEY_REVISION_H
 
-#define TURKEY_REVISION "git commit cd21cb5 on 2015-06-25"
+#define TURKEY_REVISION "git commit c6af146 on 2015-08-12"
 
 #endif // TURKEY_REVISION_H

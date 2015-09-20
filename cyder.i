@@ -196,8 +196,8 @@
 [Outputs]
   [./exodus]
     type = Exodus
-    #refinements = 1
-    output_on = 'initial timestep_end'
+    use_displaced = true
+    intervals = 10
   [../]
   [./console]
     type = Console
