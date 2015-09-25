@@ -1,17 +1,11 @@
 
 [Mesh]
   type = GeneratedMesh
-  dim = 3
-  xmin = -0.005
-  xmax =  0.005
-  ymin = -0.005
-  ymax =  0.005
-  zmin = -0.005
-  zmax =  0.005
-  nx = 20
-  ny = 20
-  nz = 20
- displacements = 'disp_x disp_y disp_z'
+  dim = 1
+  xmin = 0 
+  xmax = 0.04
+  nx = 400
+  displacements = 'disp_x'
 []
 [Variables]
   [./temperature]
@@ -172,78 +166,78 @@
 []
 
 [BCs]
-  [./top]
+  [./right]
     type = HeatRadiationBC
-    boundary = top
+    boundary = right
     variable = temperature
   [../]
-  [./other]
+  [./left]
     type = HeatFluxBC
-    boundary = 'bottom left right front back'
+    boundary = left
     value = 0
     variable = temperature
   [../]
-  [./pressuretop]
+  [./pressureright]
     type = DirichletBC
     variable = pressure
-    boundary = top
+    boundary = right
     value = 1000000
   [../]
-  [./pressureother]
+  [./pressureleft]
     type = HeatFluxBC
     variable = pressure
-    boundary = 'bottom left right front back'
+    boundary = left
     value = 0
   [../]
-  [./disp_x_top]
+  [./disp_x_right]
     type = NormalRecessionBC
     variable = disp_x
     variableold = disp_x
     temperature = temperature
-    boundary = top
+    boundary = right
     ablatecoff = 36000000
     component = x
     rho = rho
     startRho = 600
   [../]
-  [./disp_y_top]
+  [./disp_y_right]
     type = NormalRecessionBC
     variable = disp_y
     variableold = disp_y
     temperature = temperature
-    boundary = top
+    boundary = right
     ablatecoff = 36000000
     component = y
     rho = rho
     startRho = 600
   [../]
-  [./disp_z_tops]
+  [./disp_z_right]
     type = NormalRecessionBC
     variable = disp_z
     variableold = disp_z
     temperature = temperature
-    boundary = top
+    boundary = right
     ablatecoff = 36000000
     component = z
     rho = rho
     startRho = 600
   [../]
-  [./disp_x_other]
-    type = DirichletBC
-    variable = disp_x
-    boundary = 'bottom left right front back'
-    value = 0
-  [../]
-  [./disp_y_other]
+  [./disp_x_left]
     type = DirichletBC
     variable = disp_y
-    boundary = 'bottom left right front back'
+    boundary = left
+    value = 0
+  [../]
+  [./disp_y_left]
+    type = DirichletBC
+    variable = disp_x
+    boundary = left
     value = 0
   [../]
   [./disp_z_left]
     type = DirichletBC
     variable = disp_z
-    boundary = 'bottom left right front back'
+    boundary = left
     value = 0
   [../]
 []
@@ -279,7 +273,7 @@
   [../]
   [./materialbc]
     type = GiveHeatFluxMaterial
-    boundary = top
+    boundary = right
     temperature = temperature
     epsilon = 5.67e-08
     tw0 = 300

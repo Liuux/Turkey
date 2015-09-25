@@ -1,17 +1,11 @@
 
 [Mesh]
   type = GeneratedMesh
-  dim = 3
-  xmin = -0.005
-  xmax =  0.005
-  ymin = -0.005
-  ymax =  0.005
-  zmin = -0.005
-  zmax =  0.005
-  nx = 20
-  ny = 20
-  nz = 20
- displacements = 'disp_x disp_y disp_z'
+  dim = 1
+  xmin = 0 
+  xmax = 0.04
+  nx = 400
+  displacements = 'disp_x'
 []
 [Variables]
   [./temperature]
@@ -96,8 +90,8 @@
     variable = temperature
   [../]
   [./CoordMoveConvection]
-   type = CoordMoveConvection
-   variable = temperature
+    type = CoordMoveConvection
+    variable = temperature
   [../]
 
   [./density]
@@ -172,78 +166,78 @@
 []
 
 [BCs]
-  [./top]
+  [./right]
     type = HeatRadiationBC
-    boundary = top
+    boundary = right
     variable = temperature
   [../]
-  [./other]
+  [./left]
     type = HeatFluxBC
-    boundary = 'bottom left right front back'
+    boundary = left
     value = 0
     variable = temperature
   [../]
-  [./pressuretop]
+  [./pressureright]
     type = DirichletBC
     variable = pressure
-    boundary = top
+    boundary = right
     value = 1000000
   [../]
-  [./pressureother]
+  [./pressureleft]
     type = HeatFluxBC
     variable = pressure
-    boundary = 'bottom left right front back'
+    boundary = left
     value = 0
   [../]
-  [./disp_x_top]
+  [./disp_x_right]
     type = NormalRecessionBC
     variable = disp_x
     variableold = disp_x
     temperature = temperature
-    boundary = top
+    boundary = right
     ablatecoff = 36000000
     component = x
     rho = rho
-    startRho = 600
+    startRho = 700
   [../]
-  [./disp_y_top]
+  [./disp_y_right]
     type = NormalRecessionBC
     variable = disp_y
     variableold = disp_y
     temperature = temperature
-    boundary = top
+    boundary = right
     ablatecoff = 36000000
     component = y
     rho = rho
-    startRho = 600
+    startRho = 700
   [../]
-  [./disp_z_tops]
+  [./disp_z_right]
     type = NormalRecessionBC
     variable = disp_z
     variableold = disp_z
     temperature = temperature
-    boundary = top
+    boundary = right
     ablatecoff = 36000000
     component = z
     rho = rho
-    startRho = 600
+    startRho = 700
   [../]
-  [./disp_x_other]
-    type = DirichletBC
-    variable = disp_x
-    boundary = 'bottom left right front back'
-    value = 0
-  [../]
-  [./disp_y_other]
+  [./disp_x_left]
     type = DirichletBC
     variable = disp_y
-    boundary = 'bottom left right front back'
+    boundary = left
+    value = 0
+  [../]
+  [./disp_y_left]
+    type = DirichletBC
+    variable = disp_x
+    boundary = left
     value = 0
   [../]
   [./disp_z_left]
     type = DirichletBC
     variable = disp_z
-    boundary = 'bottom left right front back'
+    boundary = left
     value = 0
   [../]
 []
@@ -257,17 +251,17 @@
     block = ANY_BLOCK_ID
     sigma = 0.85
     kv = 0.15
-    kc = 0.3
+    kc = 0.35
     cpv = 1480
-    cpc = 1650
+    cpc = 2880
     rhov = 700
-    rhoc = 470
+    rhoc = 700
     cpg = 500
     rhog = 100
-    deltaH = 100000
-    precoff = 15000
+    deltaH = -600000
+    precoff = 11000
     m = 2
-    ER = 7000
+    ER = 10000
     permeability = '8.9e-9 0 0 
                     0 8.9e-9 0
                     0 0 8.9e-9'
@@ -279,11 +273,11 @@
   [../]
   [./materialbc]
     type = GiveHeatFluxMaterial
-    boundary = top
+    boundary = right
     temperature = temperature
     epsilon = 5.67e-08
     tw0 = 300
-    ts = 18000
+    ts = 15000
     qc = 2000000
   [../]
 []
@@ -318,7 +312,7 @@
   [../]
   [./tecplot]
     type = Tecplot
-    sync_times = '20.003 40.01 60.01 80.001 100.0013 120.001 140.0013 160.00131 180.0012 200.00131'
+    sync_times = '20.003 40.01 60.01 80.001 100.0013 120.001 140.001 160.001 180.001 200.001'
     sync_only = true
     use_displaced = true
   [../]

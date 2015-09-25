@@ -17,14 +17,14 @@ PyrolysisSourceKernel::PyrolysisSourceKernel(const InputParameters & parameters)
 Real PyrolysisSourceKernel::computeQpResidual()
 {
 	Real r(0);
-	r = -_property[_qp]._deltaH * _property[_qp]._Source* _test[_i][_qp];
+	r = _property[_qp]._deltaH * _property[_qp]._Source* _test[_i][_qp];
   return r;
 }
 
 Real PyrolysisSourceKernel::computeQpJacobian()
 {
 	Real r(0);
-	r = -_property[_qp]._deltaH * _property[_qp]._dsource_dT * _test[_i][_qp] * _phi[_j][_qp];
+	r = _property[_qp]._deltaH * _property[_qp]._dsource_dT * _test[_i][_qp] * _phi[_j][_qp];
 
    return r;
 }
@@ -34,7 +34,7 @@ Real  PyrolysisSourceKernel::computeQpOffDiagJacobian(unsigned int jvar)
 
 	 if ( jvar == _property[_qp]._Rho_num  )
 	    {
-	 	  return( -_property[_qp]._deltaH * _property[_qp]._dsource_dRho * _test[_i][_qp] * _phi[_j][_qp]);
+	 	  return( _property[_qp]._deltaH * _property[_qp]._dsource_dRho * _test[_i][_qp] * _phi[_j][_qp]);
 	    }
 	 else
 	 {

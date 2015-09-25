@@ -39,7 +39,7 @@ NormalRecessionBC::NormalRecessionBC(const InputParameters & parameters) :
 Real
 NormalRecessionBC::computeQpResidual()
 {
-	if ((_Rho[_qp]-_startRho)<6)
+	if ((_Rho[_qp]-_startRho)<3)
 	{
 		if (_component == 0)
 		{

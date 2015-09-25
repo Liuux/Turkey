@@ -1,24 +1,17 @@
+
 [Mesh]
   type = GeneratedMesh
   dim = 3
-  xmin = -0.005
-  xmax =  0.005
-  ymin = -0.005
-  ymax =  0.005
-  zmin = -0.005
-  zmax =  0.005
-  nx = 15
-  ny = 15
-  nz = 15
-  displacements = 'disp_x disp_y disp_z'
-  elem_type = TET4
-[]
-[MeshModifiers]
-[./block_1]
-  type = Transform
-  transform = SCALE
-  vector_value = '1 1 1'
-[../]
+  xmin = -0.04
+  xmax =  0.04
+  ymin = -0.04
+  ymax =  0.04
+  zmin = -0.04
+  zmax =  0.04
+  nx = 10
+  ny = 10
+  nz = 200
+ displacements = 'disp_x disp_y disp_z'
 []
 [Variables]
   [./temperature]
@@ -40,6 +33,8 @@
   [./disp_z]
   [../]
 []
+[NodalNormals]
+[]
 
 [AuxVariables]
  
@@ -59,9 +54,11 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
-
+  [./flux]
+   order = CONSTANT
+   family = MONOMIAL
+  [../]
 []
-
 [ICs]
   [./temp_ic]
     variable = temperature
@@ -71,7 +68,7 @@
   [./rho_ic]
     variable = rho
     type = ConstantIC
-    value = 1448
+    value = 700
   [../]
   [./pressure_ic]
     variable = pressure
@@ -99,8 +96,8 @@
     variable = temperature
   [../]
   [./CoordMoveConvection]
-    type = CoordMoveConvection
-    variable = temperature
+   type = CoordMoveConvection
+   variable = temperature
   [../]
 
   [./density]
@@ -116,33 +113,33 @@
 [./disp_x_td]
     type = DisplaceTimeDerivative
     variable = disp_x
-    damp = 50000000
+    damp = 80000000
     use_displaced_mesh = true
  [../]
  [./disp_y_td]
     type = DisplaceTimeDerivative
     variable = disp_y
-    damp = 50000000
+    damp = 80000000
     use_displaced_mesh = true
  [../]
  [./disp_z_td]
     type = DisplaceTimeDerivative
     variable = disp_z
-    damp = 50000000
+    damp = 80000000
     use_displaced_mesh = true
  [../]
  [./disp_x_diff]
-    type = Diffusion
+    type = DisplayDiffusion
     variable = disp_x
     use_displaced_mesh = true
   [../]
   [./disp_y_diff]
-    type = Diffusion
+    type = DisplayDiffusion
     variable = disp_y
     use_displaced_mesh = true
   [../]
   [./disp_z_diff]
-    type = Diffusion
+    type = DisplayDiffusion
     variable = disp_z
     use_displaced_mesh = true
   [../]
@@ -158,60 +155,33 @@
     variable = GasVelocity_y
     component = y
   [../]
+  [./gasvelocity_z]
+    type = PyrolysisGasVelocity
+    variable = GasVelocity_z
+    component = z
+  [../]
   [./PyrolysisRate]
     type = PyrolysisRate
     variable = Rho_dt
   [../]
+  [./showflux]
+    type = HeatFluxAuxKernel
+    variable = flux
+    boundary = left
+  [../]
 []
 
 [BCs]
-  [./left]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = left
-    value = 100000
-  [../]
-  [./right]
-   type = HeatFluxBC
-    variable = temperature
-    boundary = right
-    value = 0
-  [../]
   [./top]
-    type = HeatFluxBC
-    variable = temperature
+    type = HeatRadiationBC
     boundary = top
-    value = 100000
-  [../]
-  [./bottom]
-    type = HeatFluxBC
     variable = temperature
-    boundary = bottom
+  [../]
+  [./other]
+    type = HeatFluxBC
+    boundary = 'bottom left right front back'
     value = 0
-  [../]
-  [./front]
-    type = HeatFluxBC
     variable = temperature
-    boundary = front
-    value = 100000
-  [../]
-  [./back]
-    type = HeatFluxBC
-    variable = temperature
-    boundary = back
-    value = 0
-  [../]
-  [./pressureleft]
-    type = DirichletBC
-    variable = pressure
-    boundary = left
-    value = 1000000
-  [../]
-  [./pressureright]
-    type = DirichletBC
-    variable = pressure
-    boundary = right
-    value = 1000000
   [../]
   [./pressuretop]
     type = DirichletBC
@@ -219,63 +189,85 @@
     boundary = top
     value = 1000000
   [../]
-  [./pressurebottom]
-    type = DirichletBC
+  [./pressureother]
+    type = HeatFluxBC
     variable = pressure
-    boundary = bottom
-    value = 1000000
-  [../]
-  [./pressurefront]
-    type = DirichletBC
-    variable = pressure
-    boundary = front
-    value = 1000000
-  [../]
-  [./pressureback]
-    type = DirichletBC
-    variable = pressure
-    boundary = back
-    value = 1000000
-  [../]
-  [./disp_y_top]
-    type = SurfaceRecessionBC
-    variable = disp_y
-    boundary = 'top bottom left right front back'
-    component = y
+    boundary = 'bottom left right front back'
+    value = 0
   [../]
   [./disp_x_top]
-    type = SurfaceRecessionBC
+    type = NormalRecessionBC
     variable = disp_x
-    boundary = 'top bottom left right front back'
+    variableold = disp_x
+    temperature = temperature
+    boundary = top
+    ablatecoff = 36000000
     component = x
+    rho = rho
+    startRho = 600
   [../]
-  [./disp_z_top]
-    type = SurfaceRecessionBC
+  [./disp_y_top]
+    type = NormalRecessionBC
+    variable = disp_y
+    variableold = disp_y
+    temperature = temperature
+    boundary = top
+    ablatecoff = 36000000
+    component = y
+    rho = rho
+    startRho = 600
+  [../]
+  [./disp_z_tops]
+    type = NormalRecessionBC
     variable = disp_z
-    boundary = 'top bottom left right front back'
+    variableold = disp_z
+    temperature = temperature
+    boundary = top
+    ablatecoff = 36000000
     component = z
+    rho = rho
+    startRho = 600
+  [../]
+  [./disp_x_other]
+    type = DirichletBC
+    variable = disp_x
+    boundary = 'bottom left right front back'
+    value = 0
+  [../]
+  [./disp_y_other]
+    type = DirichletBC
+    variable = disp_y
+    boundary = 'bottom left right front back'
+    value = 0
+  [../]
+  [./disp_z_left]
+    type = DirichletBC
+    variable = disp_z
+    boundary = 'bottom left right front back'
+    value = 0
   [../]
 []
 
 [Materials]
-  [./material]
+  [./materialfg7]
     type = PyrolysisMaterial
     temperature = temperature
     rho = rho
     pressure = pressure
     block = ANY_BLOCK_ID
-    kv = 0.75
-    kc = 1.5
-    cpv = 556
-    cpc = 800
-    rhov = 1448
-    rhoc = 1185
-    cpg = 100
-    rhog = 10
+    sigma = 0.85
+    kv = 0.15
+    kc = 0.3
+    cpv = 1480
+    cpc = 1650
+    rhov = 700
+    rhoc = 470
+    cpg = 500
+    rhog = 100
     deltaH = 100000
-    precoff = 11000
+    precoff = 15000
     m = 2
-    ER = 10000
+    ER = 7000
     permeability = '8.9e-9 0 0 
                     0 8.9e-9 0
                     0 0 8.9e-9'
@@ -285,39 +277,29 @@
     disp_y = disp_y
     disp_z = disp_z
   [../]
-  [./bcmaterial1]
-   type = IntegratedBCMaterial
-   flux = 100000
-   boundary = top
-  [../]
-  [./bcmaterial2]
-   type = IntegratedBCMaterial
-   flux = 100000
-   boundary = left
-  [../]
-  [./bcmaterial3]
-   type = IntegratedBCMaterial
-   flux = 100000
-   boundary = front
-  [../]
-  [./bcmaterial4]
-   type = IntegratedBCMaterial
-   flux = 0
-   boundary = 'bottom right back'
+  [./materialbc]
+    type = GiveHeatFluxMaterial
+    boundary = top
+    temperature = temperature
+    epsilon = 5.67e-08
+    tw0 = 300
+    ts = 18000
+    qc = 2000000
   [../]
 []
 
 [Executioner]
   type = Transient
-  solve_type = newton
+  solve_type = PJFNK
   scheme = bdf2
   dt = 0.1
-  num_steps = 5000
+  num_steps = 50000
+  start_time = 0
 
   l_tol = 1e-04
-  nl_rel_tol = 1e-04
+  nl_rel_tol = 1e-06
   l_max_its = 12
-  nl_max_its = 8
+  nl_max_its = 12
   petsc_options_iname = '-pc_type -pc_hypre_type'
   petsc_options_value = 'hypre boomeramg'
 []
@@ -329,18 +311,24 @@
   [../]
 []
 [Outputs]
-  [./exodus]
+  [./exodus1]
     type = Exodus
     #refinements = 1
     output_on = 'initial timestep_end'
+  [../]
+  [./tecplot]
+    type = Tecplot
+    sync_times = '20.003 40.01 60.01 80.001 100.0013 120.001 140.0013 160.00131 180.0012 200.00131'
+    sync_only = true
+    use_displaced = true
   [../]
   [./console]
     type = Console
     perf_log = true
     output_on = 'timestep_end failed nonlinear linear'
   [../]
+  
 []
-
 
 
 
