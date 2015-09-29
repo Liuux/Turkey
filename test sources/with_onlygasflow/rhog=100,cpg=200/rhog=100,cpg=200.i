@@ -89,10 +89,6 @@
     type = GasConvection
     variable = temperature
   [../]
-  [./CoordMoveConvection]
-   type = CoordMoveConvection
-   variable = temperature
-  [../]
   [./density]
     type = DensitySourceKernel
     variable = rho
@@ -255,9 +251,9 @@
     cpc = 1650
     rhov = 700
     rhoc = 470
-    cpg = 800
+    cpg = 200
     rhog = 100
-    deltaH = 1000000
+    deltaH = 0
     precoff = 15000
     m = 2
     ER = 7000
@@ -311,7 +307,7 @@
   [../]
   [./tecplot]
     type = Tecplot
-    sync_times = '20.003 40.01 60.01 80.001 100.0013 120.001 140.0013 160.005 180.0012 200.00131'
+    sync_times = '20.003 40.01 60.05 80.001 100.0013 120.001 140.0013 160.005 180.0012 200.00131'
     sync_only = true
     use_displaced = true
   [../]

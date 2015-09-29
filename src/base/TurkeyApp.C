@@ -11,6 +11,7 @@
 #include "CoordMoveConvection.h"
 #include "DisplaceTimeDerivative.h"
 #include"DisplayDiffusion.h"
+#include"QuickRhoChange.h"
 
 #include "PyrolysisMaterial.h"
 #include "IntegratedBCMaterial.h"
@@ -30,6 +31,7 @@
 #include "PyrolysisRate.h"
 #include "GridMovement.h"
 #include "HeatFluxAuxKernel.h"
+#include "ShowK.h"
 
 
 
@@ -84,6 +86,7 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerKernel(CoordMoveConvection);
 	registerKernel(DisplaceTimeDerivative);
 	registerKernel(DisplayDiffusion);
+	registerKernel(QuickRhoChange);
 
 	registerMaterial(PyrolysisMaterial);
 	registerMaterial(IntegratedBCMaterial);
@@ -102,6 +105,7 @@ TurkeyApp::registerObjects(Factory & factory)
 	registerAux(PyrolysisRate);
 	registerAux(GridMovement);
 	registerAux(HeatFluxAuxKernel);
+	registerAux(ShowK);
 
 
 }

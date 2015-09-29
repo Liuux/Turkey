@@ -246,12 +246,12 @@
     block = ANY_BLOCK_ID
     sigma = 0.85
     kv = 0.15
-    kc = 0.45
+    kc = 0.9
     cpv = 1480
     cpc = 1650
     rhov = 700
     rhoc = 470
-    cpg = -800
+    cpg = 0
     rhog = 100
     deltaH = 0
     precoff = 15000

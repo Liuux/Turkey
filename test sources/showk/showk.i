@@ -52,6 +52,10 @@
    order = CONSTANT
    family = MONOMIAL
   [../]
+  [./k]
+   order = CONSTANT
+   family = MONOMIAL
+  [../]
 []
 [ICs]
   [./temp_ic]
@@ -88,10 +92,6 @@
   [./gasconvection]
     type = GasConvection
     variable = temperature
-  [../]
-  [./CoordMoveConvection]
-   type = CoordMoveConvection
-   variable = temperature
   [../]
   [./density]
     type = DensitySourceKernel
@@ -162,6 +162,11 @@
     variable = flux
     boundary = left
   [../]
+   [./showk]
+    type = ShowK
+    variable = k
+  [../]
+
 []
 
 [BCs]
@@ -255,12 +260,12 @@
     cpc = 1650
     rhov = 700
     rhoc = 470
-    cpg = 800
+    cpg = 0
     rhog = 100
-    deltaH = 1000000
+    deltaH = 0
     precoff = 15000
     m = 2
-    ER = 7000
+    ER = 9000
     permeability = '8.9e-9 0 0 
                     0 8.9e-9 0
                     0 0 8.9e-9'
@@ -290,7 +295,7 @@
   start_time = 0
 
   l_tol = 1e-04
-  nl_rel_tol = 1e-04
+  nl_rel_tol = 1e-06
   l_max_its = 12
   nl_max_its = 12
   petsc_options_iname = '-pc_type -pc_hypre_type'

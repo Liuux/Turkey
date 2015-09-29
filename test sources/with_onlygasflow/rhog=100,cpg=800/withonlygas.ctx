@@ -137,7 +137,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0000.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0000.dat
 # case: select Case 12
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -145,7 +145,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0001.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0001.dat
 # case: select Case 13
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -153,7 +153,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0002.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0002.dat
 # case: select Case 14
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -161,7 +161,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0003.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0003.dat
 # case: select Case 15
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -169,7 +169,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0004.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0004.dat
 # case: select Case 16
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -177,7 +177,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0005.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0005.dat
 # case: select Case 17
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -185,7 +185,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0006.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0006.dat
 # case: select Case 18
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -193,7 +193,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0007.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0007.dat
 # case: select Case 19
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -201,7 +201,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0008.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0008.dat
 # case: select Case 20
 # data: binary_files_are native
 # data: format Tecplot_ASCII
@@ -209,7 +209,7 @@ command: delay_refresh ON
 # data: reader_option 'Changing Connectivity' ON
 # data: reader_option 'Console Output' 'Normal'
 # data: shift_time 1.000000 0.000000 0.000000
-# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyroheat_tecplot_0009.dat
+# data: replace /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800_tecplot_0009.dat
 # File Information End
 #
 # Number Model Parts : 20
@@ -433,7 +433,7 @@ command: delay_refresh ON
 # data_partbuild: create
 # data_partbuild: end
 # Part Information End
-# Part Name          : T 60.01
+# Part Name          : T 60.05
 # Part Information Begin
 # case: select Case 13
 # data_partbuild: begin
@@ -641,7 +641,7 @@ part: modify_end
 # Restore Transformation View State
 #
 test: restore_periodicity OFF
-view_transf: restore_view CMDKEYWORD_BASEDIR/wite_onlypyrolysisheat.ctx_view
+view_transf: restore_view CMDKEYWORD_BASEDIR/withonlygas.ctx_view
 test: restore_periodicity ON
 #
 # Global node/label filter/color information
@@ -931,7 +931,7 @@ part: select_byname_begin
 part: select_byname_end
 part: elt_representation 3D_border_2D_full
 part: select_byname_begin
-"(CASE:Case 13)T 60.01"
+"(CASE:Case 13)T 60.05"
 part: select_byname_end
 part: elt_representation 3D_border_2D_full
 part: select_byname_begin
@@ -2846,10 +2846,10 @@ model: elt_filter6_testvarcomp magnitude
 model: elt_filter6_active OFF
 part: modify_end
 part: select_byname_begin
-"(CASE:Case 13)T 60.01"
+"(CASE:Case 13)T 60.05"
 part: select_byname_end
 part: modify_begin
-part: description T 60.01
+part: description T 60.05
 part: ref_frame 0
 part: visible ON
 part: viewport_vis on  0
@@ -4202,7 +4202,7 @@ curve: assign_to_y_axis auto
 curve: assign rescale
 part: select_default
 query_ent_var: begin
-query_ent_var: description num20s
+query_ent_var: description num20
 query_ent_var: query_type generated
 query_ent_var: constrain 1d_part
 query_ent_var: distance arc_length
@@ -4219,11 +4219,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 1.000000e+00 0.000000e+00 1.000000e+00
-curve: line_width 3
+curve: line_width 2
 curve: line_style solid
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4233,7 +4233,7 @@ curve: assign_to_y_axis auto
 curve: assign rescale
 part: select_default
 query_ent_var: begin
-query_ent_var: description num40s
+query_ent_var: description num40
 query_ent_var: query_type generated
 query_ent_var: constrain 1d_part
 query_ent_var: distance arc_length
@@ -4250,11 +4250,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 0.000000e+00 1.000000e+00 1.000000e+00
-curve: line_width 3
+curve: line_width 2
 curve: line_style solid
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4269,7 +4269,7 @@ query_ent_var: query_type generated
 query_ent_var: constrain 1d_part
 query_ent_var: distance arc_length
 query_ent_var: variable_1 temperature
-query_ent_var: part_idbyname (CASE:Case 13)T 60.01
+query_ent_var: part_idbyname (CASE:Case 13)T 60.05
 query_ent_var: marker_visible ON
 query_ent_var: marker_rgb 1.000000e+00 1.000000e+00 1.000000e+00
 query_ent_var: marker_size_normalized 1.000000e+00
@@ -4281,11 +4281,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 1.000000e+00 0.000000e+00 0.000000e+00
-curve: line_width 3
+curve: line_width 2
 curve: line_style solid
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4312,11 +4312,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 0.000000e+00 1.000000e+00 0.000000e+00
-curve: line_width 3
+curve: line_width 2
 curve: line_style solid
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4343,11 +4343,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 0.000000e+00 0.000000e+00 1.000000e+00
-curve: line_width 3
+curve: line_width 2
 curve: line_style solid
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4374,11 +4374,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 1.000000e+00 1.000000e+00 0.000000e+00
-curve: line_width 3
+curve: line_width 2
 curve: line_style solid
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4405,11 +4405,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 1.000000e+00 0.000000e+00 1.000000e+00
-curve: line_width 3
-curve: line_style solid
+curve: line_width 2
+curve: line_style dash
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4436,11 +4436,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 0.000000e+00 1.000000e+00 1.000000e+00
-curve: line_width 3
-curve: line_style solid
+curve: line_width 2
+curve: line_style dash
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4467,11 +4467,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 1.000000e+00 0.000000e+00 0.000000e+00
-curve: line_width 3
-curve: line_style solid
+curve: line_width 2
+curve: line_style dash
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4498,11 +4498,11 @@ query_ent_var: query
 curve: select_lastcreated
 curve: visible ON
 curve: rgb 0.000000e+00 1.000000e+00 0.000000e+00
-curve: line_width 3
-curve: line_style solid
+curve: line_width 2
+curve: line_style dash
 curve: marker none
 curve: marker_scale 1.000000e+00
-curve: line_type connect_dots
+curve: line_type smooth
 curve: smooth_subpoints 3.000000e+00
 curve: normalize_x OFF
 curve: normalize_y OFF
@@ -4511,7 +4511,7 @@ curve: offset 0.000000e+00 0.000000e+00
 curve: assign_to_y_axis auto
 curve: assign rescale
 plot: plot_desc ex20s
-plot: plot_title with only pyrolysis source
+plot: plot_title 
 plot: axis_y_title temperature
 plot: axis_x_title Distance
 plot: axis_x_labelformat %g
@@ -4521,7 +4521,7 @@ plot: axis_2_variable NOT_SET
 plot: visible ON
 plot: origin_x 0.000000e+00
 plot: origin_y 0.000000e+00
-plot: width 8.097157e-01
+plot: width 1.000000e+00
 plot: height 1.000000e+00
 plot: background_type none
 plot: background_rgb 0.000000e+00 0.000000e+00 0.000000e+00
@@ -4538,9 +4538,9 @@ plot: subgrid_linewidth 1
 plot: subgrid_linetype dotted
 plot: subgrid_rgb 1.000000e+00 1.000000e+00 1.000000e+00
 plot: legend_visible ON
-plot: legend_origin_x 3.000000e-01
-plot: legend_origin_y 9.000000e-01
-plot: legend_textsize 19
+plot: legend_origin_x 2.500000e-01
+plot: legend_origin_y 9.500000e-01
+plot: legend_textsize 9
 plot: legend_rgb 1.000000e+00 1.000000e+00 1.000000e+00
 plot: animate_curves ON
 plot: time_marker ON
@@ -4556,8 +4556,8 @@ plot: legend_minmax_textsize 20
 plot: background_transparency 6.000000e-01
 plot: axis_auto_layout ON
 plot: axis_swap OFF
-plot: axis_x_origin 1.734343e-01
-plot: axis_x_size 7.765657e-01
+plot: axis_x_origin 1.747545e-01
+plot: axis_x_size 7.752455e-01
 plot: axis_x_min 0.000000e+00
 plot: axis_x_max 3.885900e-02
 plot: axis_x_visible ON
@@ -4572,12 +4572,12 @@ plot: axis_x_titlesize 55
 plot: axis_x_titlergb 1.000000e+00 1.000000e+00 1.000000e+00
 plot: axis_x_scale linear
 plot: axis_x_autoscale ON
-plot: axis_y_origin 1.209037e-01
-plot: axis_y_size 7.789584e-01
-plot: axis_y_min 2.998500e+02
-plot: axis_y_max 2.482002e+03
+plot: axis_y_origin 1.406498e-01
+plot: axis_y_size 8.358507e-01
+plot: axis_y_min 0.000000e+00
+plot: axis_y_max 2.500000e+03
 plot: axis_y_visible ON
-plot: axis_y_numgrid 5.000000e+00
+plot: axis_y_numgrid 6.000000e+00
 plot: axis_y_numsubgrid 2.000000e+00
 plot: axis_y_gridtype tick
 plot: axis_y_sgridtype none
@@ -4587,7 +4587,7 @@ plot: axis_y_labelrgb 1.000000e+00 1.000000e+00 1.000000e+00
 plot: axis_y_titlesize 55
 plot: axis_y_titlergb 1.000000e+00 1.000000e+00 1.000000e+00
 plot: axis_y_scale linear
-plot: axis_y_autoscale ON
+plot: axis_y_autoscale OFF
 plot: axis_2_min 0.000000e+00
 plot: axis_2_max 1.000000e+00
 plot: axis_2_visible ON
@@ -4626,7 +4626,7 @@ query_interact: label_decimal_places 5
 #
 # Attributes To Restore Annotation
 #
-function: restore CMDKEYWORD_BASEDIR/wite_onlypyrolysisheat.ctx_palettes
+function: restore CMDKEYWORD_BASEDIR/withonlygas.ctx_palettes
 legend: select_palette_begin
 Coordinates
 legend: select_palette_end
@@ -4766,7 +4766,7 @@ shape: texture_object 0
 #
 # Restore Transformation View State
 #
-view_transf: restore_view CMDKEYWORD_BASEDIR/wite_onlypyrolysisheat.ctx_view
+view_transf: restore_view CMDKEYWORD_BASEDIR/withonlygas.ctx_view
 #
 # Part collection commands
 #
@@ -4850,7 +4850,7 @@ view_transf: viewport_link OFF
 file: image_format png
 file: image_format_options Compression Default
 file: image_to_file ON
-file: image_file /home/liuxiao/projects/Turkey/test sources/with_onlypyroheat/with_onlypyrolysissource
+file: image_file /home/liuxiao/projects/Turkey/test sources/with_onlygasflow/rhog=100,cpg=800/rhog=100,cpg=800,all
 file: image_to_printer OFF
 file: image_window_size normal
 file: image_window_xy 1091 585

@@ -10,6 +10,8 @@ public :
 // properties
 	Real  _sigma;
 	Real  _k;
+	Real  _kv;
+	Real  _kc;
 	Real  _cp;
     Real  _rhov;
 	Real  _rhoc;

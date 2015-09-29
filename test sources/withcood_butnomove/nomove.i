@@ -93,6 +93,7 @@
    type = CoordMoveConvection
    variable = temperature
   [../]
+
   [./density]
     type = DensitySourceKernel
     variable = rho
@@ -197,7 +198,7 @@
     ablatecoff = 36000000
     component = x
     rho = rho
-    startRho = 600
+    startRho = 100
   [../]
   [./disp_y_right]
     type = NormalRecessionBC
@@ -208,7 +209,7 @@
     ablatecoff = 36000000
     component = y
     rho = rho
-    startRho = 600
+    startRho = 10
   [../]
   [./disp_z_right]
     type = NormalRecessionBC
@@ -219,7 +220,7 @@
     ablatecoff = 36000000
     component = z
     rho = rho
-    startRho = 600
+    startRho = 100
   [../]
   [./disp_x_left]
     type = DirichletBC
@@ -255,9 +256,9 @@
     cpc = 1650
     rhov = 700
     rhoc = 470
-    cpg = 800
+    cpg = 0
     rhog = 100
-    deltaH = 1000000
+    deltaH = 0
     precoff = 15000
     m = 2
     ER = 7000
@@ -289,8 +290,8 @@
   num_steps = 50000
   start_time = 0
 
-  l_tol = 1e-04
-  nl_rel_tol = 1e-04
+  l_tol = 1e-06
+  nl_rel_tol = 1e-06
   l_max_its = 12
   nl_max_its = 12
   petsc_options_iname = '-pc_type -pc_hypre_type'
@@ -311,7 +312,7 @@
   [../]
   [./tecplot]
     type = Tecplot
-    sync_times = '20.003 40.01 60.01 80.001 100.0013 120.001 140.0013 160.005 180.0012 200.00131'
+    sync_times = '20.003 40.01 60.01 80.001 100.0013 120.001 140.0013 160.00131 180.0012 200.00131'
     sync_only = true
     use_displaced = true
   [../]

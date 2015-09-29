@@ -89,10 +89,6 @@
     type = GasConvection
     variable = temperature
   [../]
-  [./CoordMoveConvection]
-   type = CoordMoveConvection
-   variable = temperature
-  [../]
   [./density]
     type = DensitySourceKernel
     variable = rho
@@ -249,15 +245,15 @@
     pressure = pressure
     block = ANY_BLOCK_ID
     sigma = 0.85
-    kv = 0.15
+    kv = 0.1
     kc = 0.45
     cpv = 1480
     cpc = 1650
     rhov = 700
     rhoc = 470
-    cpg = 800
+    cpg = 0
     rhog = 100
-    deltaH = 1000000
+    deltaH = 0
     precoff = 15000
     m = 2
     ER = 7000
@@ -290,7 +286,7 @@
   start_time = 0
 
   l_tol = 1e-04
-  nl_rel_tol = 1e-04
+  nl_rel_tol = 1e-06
   l_max_its = 12
   nl_max_its = 12
   petsc_options_iname = '-pc_type -pc_hypre_type'
