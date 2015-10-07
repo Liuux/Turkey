@@ -245,10 +245,11 @@
     pressure = pressure
     block = ANY_BLOCK_ID
     sigma = 0.85
-    kv = 0.1
-    kc = 0.45
-    cpv = 1480
-    cpc = 1650
+    T_list = '100 1000'
+    kv_list = '0.15 0.15'
+    kc_list = '0.45 0.45'
+    cpv_list = '1480 1480'
+    cpc_list = '1650 1650'
     rhov = 700
     rhoc = 470
     cpg = 0

@@ -9,10 +9,15 @@ InputParameters validParams<PyrolysisMaterial>()
   InputParameters params = validParams<Material>();
 
   params.addParam<Real>("sigma", "sigma");
-  params.addParam<Real>("kv", "kv");
-  params.addParam<Real>("kc", "kc");
-  params.addParam<Real>("cpv", "cpv");
-  params.addParam<Real>("cpc", "cpc");
+  params.addParam<std::vector<Real> >("T_list", "The vector of temperature values for building the piecewise function");
+  params.addParam<std::vector<Real> >("kv_list", "The vector of thermal conductivity values for building the piecewise function");
+  params.addParam<std::vector<Real> >("kc_list", "The vector of thermal conductivity values for building the piecewise function");
+  params.addParam<std::vector<Real> >("cpv_list", "The vector of specific heat values for building the piecewise function");
+  params.addParam<std::vector<Real> >("cpc_list", "The vector of specific heat values for building the piecewise function");
+//  params.addParam<Real>("kv", "kv");
+//  params.addParam<Real>("kc", "kc");
+//  params.addParam<Real>("cpv", "cpv");
+//  params.addParam<Real>("cpc", "cpc");
   params.addParam<Real>("rhov", "rhov");
   params.addParam<Real>("rhoc", "rhoc");
   params.addParam<Real>("cpg", "cpg");
@@ -74,10 +79,15 @@ PyrolysisMaterial::PyrolysisMaterial(const InputParameters & parameters) :
 
 {
 	_sigma_value = getParam<Real>("sigma");
-	_kv_value = getParam<Real>("kv");
-	_kc_value = getParam<Real>("kc");
-	_cpv_value = (getParam<Real>("cpv"));
-	_cpc_value = (getParam<Real>("cpc"));
+//	_kv_value = getParam<Real>("kv");
+//	_kc_value = getParam<Real>("kc");
+//	_cpv_value = (getParam<Real>("cpv"));
+//	_cpc_value = (getParam<Real>("cpc"));
+	_T_list = getParam<std::vector<Real> >("T_list");
+	_kv_list = getParam<std::vector<Real> > ("kv_list");
+	_kc_list = getParam<std::vector<Real> > ("kc_list");
+	_cpv_list= getParam<std::vector<Real> >("cpv_list");
+	_cpc_list= getParam<std::vector<Real> >("cpc_list");
 	_rhov_value = getParam<Real> ("rhov");
 	_rhoc_value = getParam<Real> ("rhoc");
 	_cpg_value = getParam<Real> ("cpg");
@@ -89,6 +99,10 @@ PyrolysisMaterial::PyrolysisMaterial(const InputParameters & parameters) :
 	_permeability_value = getParam<RealTensorValue> ("permeability");
 	_viscosity_value = getParam<Real> ("viscosity");
 	_porosity_value = getParam<Real> ("porosity");
+	_func_kv_T =  LinearInterpolation(_T_list, _kv_list);
+	_func_kc_T =  LinearInterpolation(_T_list, _kc_list);
+	_func_cpv_T =  LinearInterpolation(_T_list, _cpv_list);
+	_func_cpc_T =  LinearInterpolation(_T_list, _cpc_list);
 
 }
 void PyrolysisMaterial::computeProperties()
@@ -98,10 +112,12 @@ void PyrolysisMaterial::computeProperties()
   {
 	  _property[qp]._sigma = _sigma_value;
 	  _property[qp]._charpercent = _rhov_value/(_rhov_value-_rhoc_value+0.00001)*(1-_rhoc_value/_Rho_value[qp]);
-	  _property[qp]._k = _kv_value*_property[qp]._charpercent+(1-_property[qp]._charpercent)*_kc_value;
-	  _property[qp]._kv = _kv_value;
-	  _property[qp]._kc = _kc_value;
-	  _property[qp]._cp = _cpv_value*_property[qp]._charpercent+(1-_property[qp]._charpercent)*_cpc_value;
+	  _property[qp]._k = _property[qp]._kv*_property[qp]._charpercent+(1-_property[qp]._charpercent)*_property[qp]._kc;
+	  _property[qp]._kv = _func_kv_T.sample(_T_value[qp]);
+	  _property[qp]._kc = _func_kc_T.sample(_T_value[qp]);
+	  _property[qp]._cp =  _property[qp]._cpv*_property[qp]._charpercent+(1-_property[qp]._charpercent)*_property[qp]._cpc;
+	  _property[qp]._cpv = _func_cpv_T.sample(_T_value[qp]);
+	  _property[qp]._cpc = _func_cpc_T.sample(_T_value[qp]);
 	  _property[qp]._rhov = _rhov_value;
 	  _property[qp]._rhoc = _rhoc_value;
 	  _property[qp]._cpg = _cpg_value;

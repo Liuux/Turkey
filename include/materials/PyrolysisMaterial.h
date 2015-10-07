@@ -13,6 +13,8 @@ public :
 	Real  _kv;
 	Real  _kc;
 	Real  _cp;
+	Real  _cpv;
+	Real  _cpc;
     Real  _rhov;
 	Real  _rhoc;
 	Real  _charpercent;
@@ -73,10 +75,19 @@ protected:
   VariableGradient & _gradient_Pressure_value;
   //get properties
   Real  _sigma_value;
-  Real  _kv_value;
-  Real  _kc_value;
-  Real  _cpv_value;
-  Real  _cpc_value;
+//  Real  _kv_value;
+//  Real  _kc_value;
+//  Real  _cpv_value;
+//  Real  _cpc_value;
+  LinearInterpolation _func_kv_T;
+  LinearInterpolation _func_kc_T;
+  LinearInterpolation _func_cpv_T;
+  LinearInterpolation _func_cpc_T;
+  std::vector<Real> _T_list;
+  std::vector<Real> _kv_list;
+  std::vector<Real> _kc_list;
+  std::vector<Real> _cpv_list;
+  std::vector<Real> _cpc_list;
   Real  _rhov_value;
   Real  _rhoc_value;
   Real  _cpg_value;
